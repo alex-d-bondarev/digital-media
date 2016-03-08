@@ -30,16 +30,9 @@ enum AlienState {
 //----------------------------------------
 color black = color(0);
 color white = color(255);
-color darkGrey = color(110, 95,  85);
-color darkRed = color(120, 50,  50);
 color grass = color(70,  100, 40);
-color leaves = color(60,  120, 20);
-color lightLeaves = color(105, 160, 70);
-color lightWheat = color(214, 190, 65);
 color orange = color(245,170,0);
 color red = color(210,50,50);
-color skin = color(252, 189, 132);
-color text = color(0, 102, 153);
 color water = color(160, 175, 240);
 color wheat = color(180, 180, 65);
 color road = color(200, 165, 130);
@@ -110,7 +103,7 @@ void setup(){
   // initialize objects
   aln = new Alien();
   bkg = new Background(black, grass, white);
-  frg = new Foreground(black, red, white);
+  frg = new Foreground(black, grass, red, white);
   
   //window
   size(1000,600);

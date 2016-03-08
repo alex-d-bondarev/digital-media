@@ -6,6 +6,7 @@ class Tree {
   //----------------------------------------
   //----------------------------------------
   // properties
+  color leaves = color(60,  120, 20);
   color lightLeaves = color(105, 160, 70);
   float posX, posY;
   

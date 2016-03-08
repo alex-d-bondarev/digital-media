@@ -11,8 +11,9 @@ class Foreground{
   //----------------------------------------
   //----------------------------------------
   // constructor
-  Foreground(color blackColor, color redColor, color whiteColor) {
+  Foreground(color blackColor, color grassColor, color redColor, color whiteColor) {
     black = blackColor;
+    grass = grassColor;
     red = redColor;
     white = whiteColor;
     kzk = new Kozak(red, black, white);
