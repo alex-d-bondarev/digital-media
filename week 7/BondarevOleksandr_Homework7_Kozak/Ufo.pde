@@ -25,8 +25,7 @@ class Ufo{
   // methods
   
   //--------------------------------------------------------------------------------
-  // Effect: set UFO variables 
-  //         to starting point
+  // Effect: set UFO variables to starting point
   //--------------------------------------------------------------------------------
   void init() {
     aln.reset();
