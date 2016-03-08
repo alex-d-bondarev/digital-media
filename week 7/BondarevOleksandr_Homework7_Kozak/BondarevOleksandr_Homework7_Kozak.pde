@@ -1,54 +1,8 @@
 /* Code Description
-Added for homework #5:
-1.Small alien is moving now 
--- changed: drawSmallAlien(), setLandingStatus
--- added: alienNextState(), drawFrontHill(), smallAlien(), moveAlienToCoordinate(), moveToCoordinate()
-1.1. After landing he waits for 1 second
-2. Changed some names of functions that are used in draw() to more readable ones
 
-//----------------------------------------
-Added for homework #4:
-1. Used loop to draw a small forest in the left middle part of the screen (updated drawNature())
-2. For good landing you can see a small alien now (added drawSmallAlien())
-3. Now ship shows fire when you press control buttons (updated drawUFO())
-4. Now you can see UFO legs only when it has landed (updated drawUFO())
-5. Updated Landing field highlighter (drawLandingField()): press "L" key to see improved landing field 
-  + added more comments in drawLandingField
-6. Pausing functionality: press "P" key to pause the UFO flight (updated keyPressed() and drawUFO())
-
-//----------------------------------------
-Added for homework #3:
-1. Land in different locations and see a different messages (setLandingStatus)
-1.1 Press "L" to see new landing field
-2. UFO is not flying out of the screen now
-3. Added some comments for legacy code
-
-//----------------------------------------
-Added for homework #2
-1. Added some hills, trees and river in background
-
-2. A UFO (UFO), that can land in different areas
-2.1. To control an UFO click (holding also works) arrow keys
-UP - adds some torque  to go up
-LEFT - adds some torque to go left and a little torque to go up
-RIGHT - adds some torque to go right and a little torque to go up
-
-2.2. You can also use wind to fly a UFO. 
-Hit a mouse at any place on screen. Wind will blow in appropriate way. 
-You cannot change wind power, but you can change it's angle. 
-For each wind blow you need to press mouse button again.
-
-NOTE: Try to achieve high horizontal speed - you will see a frame rate glitch.
-
-inspired by an old lunar lander game
-http://moonlander.seb.ly/
-
-//----------------------------------------
-Homework #1
-This app will draw a red tall kozak
-
-inspired by an old cartoon
-https://youtu.be/P8vvK_e2yhw
+Added for homework week #7
+1. Updated code to meet OOP standards
+1.1 Removed extra variables, that are used only for specific classes, from main class
 */
 
 //------------------------------------------------------//
@@ -156,7 +110,17 @@ long beforeWait;
 
 
 //----------------------------------------
+// Declare classes
+//----------------------------------------
+
+Background bkg;
+
+
+//----------------------------------------
 void setup(){
+  // initialize objects
+  bkg = new Background(black, grass, white);
+  
   //window
   size(1000,600);
   background(255);
@@ -166,8 +130,7 @@ void setup(){
 
 //----------------------------------------
 void draw(){
-  drawSky();
-  drawNature();
+  bkg.display();
   drawSmallAlien();
   drawFrontHill();
   drawLandingField();
@@ -637,130 +600,9 @@ void smallAlien(float aPosX, float aPosY) {
 }
 
 
-//----------------------------------------
-// Effect: draws sky 
-//----------------------------------------
-// I did not get how to use gradient
-// this is some kind of workaround
-void drawSky(){ 
-  // set style
-  int redVar = 50;
-  int greenVar = 50;
-  int blueVar = 100;
-  int screenY = 0;
-  noStroke();
-  colorMode(RGB,255);
-  
-  // draw 1px line of screen width 
-  // starting on top of the screen and untill the bottom
-  for (int i = 0; i < height; i++) {
-   stroke(redVar, greenVar, blueVar);
-   line(0,screenY, width, screenY);
-   
-   // no color change for first 10 px
-   // increment all colors untill blue becomes maximum (255)
-   if (blueVar < 255 && screenY > 10) {
-     blueVar++;
-     redVar++;
-     greenVar++;
-     
-   // increment other colors that are left after blue
-   // untill they become maximum (255 or white)
-   } else if (redVar < 255 || greenVar < 255) {
-     redVar++;
-     greenVar++;
-   }
-   
-   // go to next screen line
-   screenY++;
-  }
-}
-
 //------------------------------------------------------//
 //------------ Draw complex static pictures ------------//
 //------------------------------------------------------//
-//----------------------------------------
-// Effect: draws some hills in background
-//----------------------------------------
-void drawNature() {
-  
-  stroke(0);
-  ellipseMode(CENTER);
-  
-  //----------------------------------------
-  // hills in background
-  fill(lightWheat);
-  ellipse(400, 550, 1000, 500);
-  drawTree(400,295);
-  drawTree(420,290);
-  drawTree(445,300);
-  
-  fill(lightWheat);
-  ellipse(330, 530, 600, 500);
-  drawTree(290,360);
-  
-  fill(lightWheat);
-  ellipse(50, 450, 400, 400);
-  ellipse(150, 530, 350, 500);
-  
-  //----------------------------------------
-  // small forest in the left middle part of the screen
-  for(int y=230; y<=400 ; y+=20) {
-    for(int x=0; x<=20 + y%210; x+=20) {
-      drawTree(x,y);
-      if (y<340) { y+=5; }
-    }
-  }
-  
-  // grass hill
-  fill(wheat);
-  ellipse(150, 500, 350, 370);
-  
-  // 1 short line of trees near the river
-  int treeLineY = 400;
-  for(int x=10; x<=100; x+=25) {
-    drawTree(x,treeLineY);
-    treeLineY -= 25;
-  }
-  
-  //----------------------------------------
-  // a river
-  fill(water);
-  stroke(white);
-  strokeWeight(4);
-  beginShape();
-  vertex(50,470);
-  bezierVertex(50,470, 100,420, 270,390);
-  bezierVertex(270,390, 300,390, 330,370);
-  bezierVertex(330,370, 360,350, 440,350);
-  bezierVertex(440,350, 515,365, 500,340);
-  bezierVertex(500,340, 490,320, 600,325);
-  vertex(600,460);
-  endShape();
-  
-  stroke(black);
-  strokeWeight(1);
-  
-  //----------------------------------------
-  // top main hill
-  fill(grass);
-  ellipse(850, 750, 750, 1200);
-  
-  // far road
-  fill(road);
-  beginShape();
-  vertex(870,440);
-  bezierVertex(870,440, 880,360, 760,345);
-  bezierVertex(760,345, 670,345, 715,290);
-  bezierVertex(715,290, 756,255, 690,255);
-  bezierVertex(690,255, 630,240, 715,190);
-  bezierVertex(715,190, 840,110, 945,168);
-  bezierVertex(945,168, 1050,225, 820,270);
-  bezierVertex(820,270, 700,295, 775,325);
-  bezierVertex(775,325, 940,340, 930,470);
-  endShape();
-}
-
 
 //----------------------------------------
 // Effect: front hill
