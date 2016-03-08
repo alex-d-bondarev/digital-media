@@ -168,40 +168,6 @@ void resetUFO() {
 
 
 //----------------------------------------
-// EFFECT: Change state of the alien 
-//         to a next state
-//----------------------------------------
-void alienNextState() {
-  switch(alienState){
-    case INUFO: 
-      alienState = AlienState.LANDED;
-      break;
-    case LANDED: 
-      alienState = AlienState.TOHILLENTRANCE;
-      break;
-    case TOHILLENTRANCE: 
-      alienState = AlienState.TOFIRSTPOINT;
-      break;
-    case TOFIRSTPOINT: 
-      alienState = AlienState.TOSECONDPOINT;
-      break;
-    case TOSECONDPOINT: 
-      alienState = AlienState.BETWEENHILLS;
-      break;
-    case BETWEENHILLS: 
-      alienState = AlienState.TOHILLTOP;
-      break;
-    case TOHILLTOP: 
-      alienState = AlienState.TOKOZAK;
-      break;
-    case TOKOZAK: 
-      alienState = AlienState.NEARKOZAK;
-      break;
-  }
-}
-
-
-//----------------------------------------
 // Effect: highlights landing field 
 //----------------------------------------
 void drawLandingField(){
@@ -368,7 +334,7 @@ void setLandingStatus(){
       // change alien coordinates
       alienX = posX;
       alienY = posY-25;
-      alienNextState();
+      aln.nextState();
       
     // for landing on right part of big hill
     } else if(posX > rightHillTop && posY > handHeight) {
