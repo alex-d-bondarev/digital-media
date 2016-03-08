@@ -5,7 +5,9 @@ class Alien{
   //----------------------------------------
   // properties
   AlienState alienState;
-  
+  float alienX;
+  float alienY;
+    
   //----------------------------------------
   //----------------------------------------
   // constructor
@@ -23,6 +25,7 @@ class Alien{
   void reset() {
     alienState = AlienState.INUFO;
   }
+    
     
   //----------------------------------------
   // Effect: draws and moves small alien
@@ -58,6 +61,7 @@ class Alien{
         moveAlienToCoordinate(910, 570);
     }
   }
+  
   
   //----------------------------------------
   // GIVEN: x and y coordinates
@@ -159,4 +163,12 @@ class Alien{
       
       popMatrix();
   }
+  
+  
+  //----------------------------------------
+  // GIVEN: x or y coordinate
+  // EFFECT: set new coordinate
+  //----------------------------------------
+  void setX (float x) { alienX = x; }
+  void setY (float y) { alienY = y; }
 }

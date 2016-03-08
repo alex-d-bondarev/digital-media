@@ -2,7 +2,7 @@
 
 Added for homework week #7
 1. Updated code to meet OOP standards
-1.1 Removed extra variables, that are used only for specific classes, from main class
+1.1 Removed some variables, that are used only for specific classes, from main class
 */
 
 //------------------------------------------------------//
@@ -96,9 +96,6 @@ int rightHillTop = pointX+230;
 //----------------------------------------
 // Alien
 //----------------------------------------
-AlienState alienState;
-float alienX;
-float alienY;
 float alienVelocity = 2;
 long timeToWait = 1000;
 
@@ -332,8 +329,8 @@ void setLandingStatus(){
       niceLanding = true;
       
       // change alien coordinates
-      alienX = posX;
-      alienY = posY-25;
+      aln.setX(posX);
+      aln.setY(posY-25);
       aln.nextState();
       
     // for landing on right part of big hill
