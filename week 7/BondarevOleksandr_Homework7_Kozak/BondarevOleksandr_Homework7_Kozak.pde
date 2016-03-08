@@ -54,18 +54,14 @@ float posY;
 float verticalSpeed;
 
 // for drawing
-boolean highlighField;
 boolean moveLeft;
 boolean moveRight;
 boolean moveUp;
 int pointX = 700;
 int pointY = 210;
 String message;
-
-// for landing
 boolean landed;
 boolean niceLanding;
-boolean showLandingLine;
 
 // landing field
 // Y
@@ -88,6 +84,7 @@ int rightHillTop = pointX+230;
 Alien aln;
 Background bkg;
 Foreground frg;
+Landingareas landar;
 
 
 //----------------------------------------
@@ -96,6 +93,7 @@ void setup(){
   aln = new Alien();
   bkg = new Background(black, grass, white);
   frg = new Foreground(black, grass, red, white);
+  landar = new Landingareas(red, UFOStroke);
   
   //window
   size(1000,600);
@@ -108,7 +106,7 @@ void setup(){
 void draw(){
   bkg.display();
   aln.inBackground();
-  drawLandingField();
+  landar.display();
   drawUFO();
   frg.display();
 }
@@ -131,57 +129,13 @@ void resetUFO() {
   moveRight = false;
   moveLeft = false;
   moveUp = false;
-  highlighField = true;
   landed = false;
-  showLandingLine = false;
+  landar.hide();
   paused = false;
   niceLanding = false;
 }
 
 
-
-//----------------------------------------
-// Effect: highlights landing field 
-//----------------------------------------
-void drawLandingField(){
-  if(showLandingLine){
-    // set style
-    strokeWeight(5);
-    // move every frame
-    if(frameCount % 20 == 0){
-      highlighField = ! highlighField;
-    } 
-    if(highlighField) {
-      // draw blue/safe landing zone
-      stroke(UFOStroke);
-      fill(UFOStroke);
-      rect(leftHillTop,hillHeight, rightHillTop-leftHillTop, 40);
-      
-      // draw red/unsafe landing zone
-      stroke(red);
-      fill(red);
-      
-      //head landing
-      rect(leftHeadEdge,headHeight, rightHeadEdge-leftHeadEdge,20);
-      
-      // hand landing
-      rect(rightHeadEdge,handHeight, rightHandEdge-rightHeadEdge,20);
-      
-      // water landing
-      rect(rightHandEdge+50,extremeHeight, leftHillBottom-rightHandEdge-50,10);
-      
-      // left hill botton
-      rect(leftHillBottom, extremeHeight-10, leftHillTop-leftHillBottom, 10);
-      
-      // right hill botton
-      rect(rightHillTop, extremeHeight-10, width-rightHillTop,10);
-      
-      // everithing else
-      line(0,extremeHeight, width,extremeHeight);
-    }
-    strokeWeight(1);
-  }
-}
 
 //----------------------------------------
 // Effect: draws UFO 
@@ -349,7 +303,7 @@ void setLandingStatus(){
     horizontalSpeed = 0;
     
     // switch off landing highlighter
-    showLandingLine = false;
+    landar.hide();
     
     // start showing a small alien for nice landing
     if (niceLanding) {
@@ -402,7 +356,7 @@ void keyPressed(){
    // reset UFO
    resetUFO();
  } else if(key == 'l' || key == 'L'){
-   showLandingLine = ! showLandingLine;
+   landar.opposite();
  } else if(key == 'p' || key == 'P'){
    paused = ! paused;
  }
