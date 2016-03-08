@@ -4,7 +4,11 @@ class Ufo{
   //----------------------------------------
   //----------------------------------------
   // properties
-  color UFOFill = color(50,106,70);
+  color ufoMainColor = color(50,106,70);
+  float GRAVITY = 0.015;
+  float TORQUE = 0.05;
+  float WINDAGE = 0.005;
+  boolean paused;
   
   //----------------------------------------
   //----------------------------------------
@@ -28,7 +32,7 @@ class Ufo{
     translate(posX, posY-20); // -20 (landing legs length) for better looking landing
     
     // set UFO style
-    fill(UFOFill);
+    fill(ufoMainColor);
     stroke(UFOStroke);
     
     //----------------------------------------
@@ -125,96 +129,120 @@ class Ufo{
     if(posX > 1030){ posX = -30; } 
     if(posY < 0) { verticalSpeed = 0; }
   }
-
-
-//----------------------------------------
-// Handle landing
-//----------------------------------------
-void setLandingStatus(){
   
-  if(!landed) {
-    landed = true;
+  
+  //----------------------------------------
+  // Handle landing
+  //----------------------------------------
+  void setLandingStatus(){
     
-    // for big hill landing
-    if(posY >= hillHeight && posY < hillHeight+40 && posX > leftHillTop && posX < rightHillTop) {
-      message = "Nice!";
-      niceLanding = true;
+    if(!landed) {
+      landed = true;
       
-      // change alien coordinates
-      aln.setX(posX);
-      aln.setY(posY-25);
-      aln.nextState();
+      // for big hill landing
+      if(posY >= hillHeight && posY < hillHeight+40 && posX > leftHillTop && posX < rightHillTop) {
+        message = "Nice!";
+        niceLanding = true;
+        
+        // change alien coordinates
+        aln.setX(posX);
+        aln.setY(posY-25);
+        aln.nextState();
+        
+      // for landing on right part of big hill
+      } else if(posX > rightHillTop && posY > handHeight) {
+        message = "Go left";
       
-    // for landing on right part of big hill
-    } else if(posX > rightHillTop && posY > handHeight) {
-      message = "Go left";
-    
-    // for landing on left part of big hill
-    } else if(posX < leftHillTop && posX > leftHillBottom && posY > extremeHeight) {
-      message = "Go right";
-    
-    // for river landing
-     } else if(posX > rightHandEdge+70 && posX < leftHillBottom && posY > extremeHeight) {
-      message = "No water!!";
+      // for landing on left part of big hill
+      } else if(posX < leftHillTop && posX > leftHillBottom && posY > extremeHeight) {
+        message = "Go right";
       
-    // for hand landing 
-     } else if(posX > rightHeadEdge && posX < rightHandEdge 
-                                     && posY > handHeight && posY < handHeight+30) {
-      message = "Impossible!";
-    
-    // for head landing
-     } else if(posX > leftHeadEdge && posX < rightHeadEdge 
-                                     && posY > headHeight && posY < headHeight+20) {
-      message = "???";
-    
-    // for far hills landing
-    } else if (posY > extremeHeight) {
-    // landOnFarHills = true;
-      message = "Too far";
-    
-    // still flying
-    } else {
-      landed = false;
+      // for river landing
+       } else if(posX > rightHandEdge+70 && posX < leftHillBottom && posY > extremeHeight) {
+        message = "No water!!";
+        
+      // for hand landing 
+       } else if(posX > rightHeadEdge && posX < rightHandEdge 
+                                       && posY > handHeight && posY < handHeight+30) {
+        message = "Impossible!";
+      
+      // for head landing
+       } else if(posX > leftHeadEdge && posX < rightHeadEdge 
+                                       && posY > headHeight && posY < headHeight+20) {
+        message = "???";
+      
+      // for far hills landing
+      } else if (posY > extremeHeight) {
+      // landOnFarHills = true;
+        message = "Too far";
+      
+      // still flying
+      } else {
+        landed = false;
+      }
     }
+  
+    // draw landed ship with text in dialog
+    if(landed) {
+      // stop UFO
+      verticalSpeed = 0;
+      horizontalSpeed = 0;
+      
+      // switch off landing highlighter
+      landar.hide();
+      
+      // start showing a small alien for nice landing
+      if (niceLanding) {
+      
+        
+      // show dialog for wrong landing
+      } else {
+        pushMatrix();
+        translate(-10,-50);
+        
+        // set style
+        noStroke();
+        textAlign(CENTER);
+        fill(white);
+        
+        // draw dialog cloud
+        ellipse(10,-10,90,50);
+        beginShape();
+        vertex(-35,-10);
+        bezierVertex(-35,-10, -35,15, 0,25);
+        endShape();
+        
+        fill(black);
+        text(message, 10,-10);
+        
+        popMatrix();
+        
+      }
+    }  
+  }
+  
+  
+  //----------------------------------------
+  // Effect: set UFO variables 
+  //         to starting point
+  //----------------------------------------
+  void reset() {
+    aln.reset();
+    landar.hide();
+    posX = 100;
+    posY = 20;
+    horizontalSpeed = 0;
+    verticalSpeed = 0;
+    moveRight = false;
+    moveLeft = false;
+    moveUp = false;
+    landed = false;
+    paused = false;
+    niceLanding = false;
   }
 
-  // draw landed ship with text in dialog
-  if(landed) {
-    // stop UFO
-    verticalSpeed = 0;
-    horizontalSpeed = 0;
-    
-    // switch off landing highlighter
-    landar.hide();
-    
-    // start showing a small alien for nice landing
-    if (niceLanding) {
-    
-      
-    // show dialog for wrong landing
-    } else {
-      pushMatrix();
-      translate(-10,-50);
-      
-      // set style
-      noStroke();
-      textAlign(CENTER);
-      fill(white);
-      
-      // draw dialog cloud
-      ellipse(10,-10,90,50);
-      beginShape();
-      vertex(-35,-10);
-      bezierVertex(-35,-10, -35,15, 0,25);
-      endShape();
-      
-      fill(black);
-      text(message, 10,-10);
-      
-      popMatrix();
-      
-    }
-  }  
-}
-
+  
+  void pausedOpposite() {
+    paused = ! paused;
+  }
 }
