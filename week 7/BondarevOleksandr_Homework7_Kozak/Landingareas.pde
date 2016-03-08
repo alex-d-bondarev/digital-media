@@ -4,14 +4,18 @@ class Landingareas{
   //----------------------------------------
   //----------------------------------------
   // properties
+  boolean deafaultLandingArea = false;
   boolean highlighField;
   boolean showLandingLine;
+  color badArea;
+  color goodArea;
   
   //----------------------------------------
   //----------------------------------------
   // constructor
-  Landingareas(boolean show) {
-    showLandingLine = show;
+  Landingareas(color bad, color good) {
+    badArea = bad;
+    goodArea = good;
   }
   
   //----------------------------------------

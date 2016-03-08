@@ -54,19 +54,14 @@ float posY;
 float verticalSpeed;
 
 // for drawing
-boolean highlighField;
 boolean moveLeft;
 boolean moveRight;
 boolean moveUp;
 int pointX = 700;
 int pointY = 210;
 String message;
-
-// for landing
-boolean deafaultLandingArea = false;
 boolean landed;
 boolean niceLanding;
-boolean showLandingLine;
 
 // landing field
 // Y
@@ -98,7 +93,7 @@ void setup(){
   aln = new Alien();
   bkg = new Background(black, grass, white);
   frg = new Foreground(black, grass, red, white);
-  landar = new Landingareas(deafaultLandingArea);
+  landar = new Landingareas(red, UFOStroke);
   
   //window
   size(1000,600);
