@@ -28,9 +28,6 @@ enum AlienState {
 //----------------------------------------
 // Colors
 //----------------------------------------
-color alien = color(180,170,140);
-color alienCloth = color(125,155,125);
-color alienNeck = color(215,240,240);
 color black = color(0);
 color white = color(255);
 color darkGrey = color(110, 95,  85);
