@@ -121,6 +121,7 @@ void draw(){
 //----------------------------------------
 void resetUFO() {
   aln.reset();
+  landar.hide();
   posX = 100;
   posY = 20;
   horizontalSpeed = 0;
@@ -129,7 +130,6 @@ void resetUFO() {
   moveLeft = false;
   moveUp = false;
   landed = false;
-  landar.hide();
   paused = false;
   niceLanding = false;
 }
