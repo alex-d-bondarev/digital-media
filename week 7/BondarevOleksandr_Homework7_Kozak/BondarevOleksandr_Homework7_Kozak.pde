@@ -149,7 +149,7 @@ void draw(){
 //         to starting point
 //----------------------------------------
 void resetUFO() {
-  alienState = AlienState.INUFO;
+  aln.reset();
   beforeWait = 0;
   posX = 100;
   posY = 20;
