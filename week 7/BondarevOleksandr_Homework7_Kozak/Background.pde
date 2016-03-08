@@ -1,7 +1,6 @@
 class Background {
 
-  //----------------------------------------
-  //----------------------------------------
+  //================================================================================
   // properties
   color black;
   color grass;
@@ -11,8 +10,7 @@ class Background {
   color wheat = color(180, 180, 65);
   color white;
   
-  //----------------------------------------
-  //----------------------------------------
+  //================================================================================
   // constructor
   Background(color blackColor, color grassColor, color whiteColor) {
     black = blackColor;
@@ -21,21 +19,20 @@ class Background {
     white = whiteColor;
   }
   
-  //----------------------------------------
-  //----------------------------------------
+  //================================================================================
   // methods
   
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
   // Effect: displays sky and nature background
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
   void display() {
     drawSky();
     drawNature();
   }
   
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
   // Effect: draws sky 
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
   // I did not get how to use gradient
   // this is some kind of workaround
   void drawSky(){ 
@@ -47,12 +44,14 @@ class Background {
     noStroke();
     colorMode(RGB,255);
     
+    //----------------------------------------
     // draw 1px line of screen width 
     // starting on top of the screen and untill the bottom
     for (int i = 0; i < height; i++) {
      stroke(redVar, greenVar, blueVar);
      line(0,screenY, width, screenY);
      
+     //----------------------------------------
      // no color change for first 10 px
      // increment all colors untill blue becomes maximum (255)
      if (blueVar < 255 && screenY > 10) {
@@ -60,6 +59,7 @@ class Background {
        redVar++;
        greenVar++;
        
+     //----------------------------------------  
      // increment other colors that are left after blue
      // untill they become maximum (255 or white)
      } else if (redVar < 255 || greenVar < 255) {
@@ -67,15 +67,16 @@ class Background {
        greenVar++;
      }
      
+     //----------------------------------------
      // go to next screen line
      screenY++;
     }
   }
   
   
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
   // Effect: draws some hills in background
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
   void drawNature() {
     
     stroke(0);

@@ -1,8 +1,7 @@
 class Ufo{
 
   
-  //----------------------------------------
-  //----------------------------------------
+  //================================================================================
   // properties
   boolean landed;
   boolean niceLanding;
@@ -16,21 +15,37 @@ class Ufo{
   
   String message;
   
-  //----------------------------------------
-  //----------------------------------------
+  //================================================================================
   // constructor
   Ufo() {
     
   }
   
-  //----------------------------------------
-  //----------------------------------------
+  //================================================================================
   // methods
   
+  //--------------------------------------------------------------------------------
+  // Effect: set UFO variables 
+  //         to starting point
+  //--------------------------------------------------------------------------------
+  void init() {
+    aln.reset();
+    landar.hide();
+    posX = 100;
+    posY = 20;
+    horizontalSpeed = 0;
+    verticalSpeed = 0;
+    moveRight = false;
+    moveLeft = false;
+    moveUp = false;
+    landed = false;
+    paused = false;
+    niceLanding = false;
+  }
     
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
   // Effect: draws UFO 
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
   void display(){
      
     // UFO is moved by pushing coordinates
@@ -68,7 +83,7 @@ class Ufo{
     if(!paused) { moveUFO(); }
     
     //----------------------------------------
-    // draw torque (red/orange fire)
+    // draw torque (red and orange fire)
     noStroke();
     // color will be changing each frame
     if(frameCount % 2 == 0){ fill(red); } 
@@ -98,9 +113,9 @@ class Ufo{
   }
   
   
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
   // Move UFO
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
   void moveUFO(){
     // update by controls
     if(moveRight) { 
@@ -113,6 +128,7 @@ class Ufo{
       verticalSpeed-=TORQUE; 
     }
     
+    //----------------------------------------
     // update by gravity
     verticalSpeed += GRAVITY;
     // update by windage
@@ -122,14 +138,16 @@ class Ufo{
       horizontalSpeed+= WINDAGE;
     }
     
+    //----------------------------------------
     // check if UFO landed
     setLandingStatus();
   
-    
+    //----------------------------------------
     // update position
     posX += horizontalSpeed;
     posY += verticalSpeed;
     
+    //----------------------------------------
     // out of the screen
     if(posX < -30) { posX = 1030; }
     if(posX > 1030){ posX = -30; } 
@@ -137,14 +155,15 @@ class Ufo{
   }
   
   
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
   // Handle landing
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
   void setLandingStatus(){
     
     if(!landed) {
       landed = true;
       
+      //----------------------------------------
       // for big hill landing
       if(posY >= hillHeight && posY < hillHeight+40 && posX > leftHillTop && posX < rightHillTop) {
         message = "Nice!";
@@ -155,6 +174,7 @@ class Ufo{
         aln.setY(posY-25);
         aln.nextState();
         
+      //----------------------------------------  
       // for landing on right part of big hill
       } else if(posX > rightHillTop && posY > handHeight) {
         message = "Go left";
@@ -188,6 +208,7 @@ class Ufo{
       }
     }
   
+    //----------------------------------------
     // draw landed ship with text in dialog
     if(landed) {
       // stop UFO
@@ -200,7 +221,7 @@ class Ufo{
       // start showing a small alien for nice landing
       if (niceLanding) {
       
-        
+      //----------------------------------------  
       // show dialog for wrong landing
       } else {
         pushMatrix();
@@ -226,28 +247,11 @@ class Ufo{
       }
     }  
   }
-  
-  
-  //----------------------------------------
-  // Effect: set UFO variables 
-  //         to starting point
-  //----------------------------------------
-  void reset() {
-    aln.reset();
-    landar.hide();
-    posX = 100;
-    posY = 20;
-    horizontalSpeed = 0;
-    verticalSpeed = 0;
-    moveRight = false;
-    moveLeft = false;
-    moveUp = false;
-    landed = false;
-    paused = false;
-    niceLanding = false;
-  }
 
-  
+
+  //--------------------------------------------------------------------------------
+  // Effect: changes value of "paused" to opposite value
+  //--------------------------------------------------------------------------------
   void pausedOpposite() {
     paused = ! paused;
   }

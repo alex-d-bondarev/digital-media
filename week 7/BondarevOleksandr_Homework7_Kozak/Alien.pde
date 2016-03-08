@@ -1,42 +1,42 @@
 class Alien{
   
   
-  //----------------------------------------
-  //----------------------------------------
+  //================================================================================
   // properties
+  AlienState alienState;
+  
   color alien = color(180,170,140);
   color alienCloth = color(125,155,125);
   color alienNeck = color(215,240,240);
-  AlienState alienState;
+  
   float alienX;
   float alienY;
   float alienVelocity = 2;
+  
   long beforeWait;
   long timeToWait = 1000;
     
-  //----------------------------------------
-  //----------------------------------------
+  //================================================================================
   // constructor
   Alien() {
     
   }
   
-  //----------------------------------------
-  //----------------------------------------
+  //================================================================================
   // methods
   
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
   // Effect: resets alien state
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
   void reset() {
     alienState = AlienState.INUFO;
     beforeWait = 0;
   }
     
     
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
   // Effect: draws and moves small alien
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
   void inBackground() { 
     
     // right after the landing
@@ -47,21 +47,25 @@ class Alien{
         if (beforeWait == 0) { beforeWait = millis(); }
         if (millis() - beforeWait > timeToWait) { aln.nextState(); }
         
+    //----------------------------------------    
     // start mooving to field entrance
     } else if ( alienState == AlienState.TOHILLENTRANCE ){
         smallAlien(alienX, alienY);
         moveAlienToCoordinate(750, 250);
         
+    //----------------------------------------    
     // start mooving to first point
     } else if ( alienState == AlienState.TOFIRSTPOINT ){
         smallAlien(alienX, alienY);
         moveAlienToCoordinate(735, 330);
         
+    //----------------------------------------    
     // start mooving to second point
     } else if ( alienState == AlienState.TOSECONDPOINT ) {
         smallAlien(alienX, alienY);
         moveAlienToCoordinate(840, 330);
         
+    //----------------------------------------    
     // start mooving out of the sight
     } else if ( alienState == AlienState.BETWEENHILLS ) {
         smallAlien(alienX, alienY);
@@ -70,11 +74,10 @@ class Alien{
   }
   
   
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
   // GIVEN: x and y coordinates
-  // EFFECT: moves alien to given coordinates
-  //         changes status to next when coming
-  //----------------------------------------
+  // EFFECT: moves alien to given coordinates changes status to next when coming
+  //--------------------------------------------------------------------------------
   void moveAlienToCoordinate(int trgtX, int trgtY) { 
     if (alienX != trgtX || alienY != trgtY) {          
       alienX = moveToCoordinate(alienX,trgtX);
@@ -83,12 +86,11 @@ class Alien{
   }
   
   
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
   // GIVEN: current and target coordinates
-  // EFFECT: makes 1 step towards given 
-  //         coordinates. Step is taken 
+  // EFFECT: makes 1 step towards given coordinates. Step is taken 
   //         according to aliens' velocity
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
   float moveToCoordinate(float cur, float trgt) {
     if (cur > trgt + alienVelocity) { return cur - alienVelocity; } 
     else if (cur < trgt - alienVelocity) { return cur + alienVelocity; }
@@ -96,10 +98,9 @@ class Alien{
   }
   
   
-  //----------------------------------------
-  // EFFECT: Change state of the alien 
-  //         to a next state
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
+  // EFFECT: Change state of the alien to a next state
+  //--------------------------------------------------------------------------------
   void nextState() {
     switch(alienState){
       case INUFO: 
@@ -131,17 +132,17 @@ class Alien{
   }
   
     
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
   // GIVEN: x and y coordinates
-  // EFFECT: draws a small alien in given
-  //         coordinates
-  //----------------------------------------
+  // EFFECT: draws a small alien in given coordinates
+  //--------------------------------------------------------------------------------
   void smallAlien(float aPosX, float aPosY) {
     
       // push picture to given coordinates
       pushMatrix();
       translate(aPosX, aPosY);
       
+      //----------------------------------------
       // draw a small alien           
       fill(alienCloth);
       ellipse(0,-15, 35, 50);
@@ -150,18 +151,21 @@ class Alien{
       fill(alienNeck);
       ellipse(0,-22, 40,5);
       
+      //----------------------------------------
       // draw eyes
       stroke(white);
       strokeWeight(6);
       point(-5,-33);
       point(5,-33);
       
+      //----------------------------------------
       // draw hands and legs
       stroke(black);
       line(-20, -15, -20, 0);
       line(20, -15, 20, 0);
       line(-5, 10, 5, 10);
       
+      //----------------------------------------
       // draw hair and mustache
       strokeWeight(1);
       line(0,-40, 0, -50);
@@ -172,10 +176,10 @@ class Alien{
   }
   
   
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
   // GIVEN: x or y coordinate
   // EFFECT: set new coordinate
-  //----------------------------------------
+  //--------------------------------------------------------------------------------
   void setX (float x) { alienX = x; }
   void setY (float y) { alienY = y; }
   
