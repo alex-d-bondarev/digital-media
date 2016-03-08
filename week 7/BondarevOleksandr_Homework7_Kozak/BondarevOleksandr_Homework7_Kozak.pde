@@ -63,6 +63,7 @@ int pointY = 210;
 String message;
 
 // for landing
+boolean deafaultLandingArea = false;
 boolean landed;
 boolean niceLanding;
 boolean showLandingLine;
@@ -88,6 +89,7 @@ int rightHillTop = pointX+230;
 Alien aln;
 Background bkg;
 Foreground frg;
+Landingareas landar;
 
 
 //----------------------------------------
@@ -96,6 +98,7 @@ void setup(){
   aln = new Alien();
   bkg = new Background(black, grass, white);
   frg = new Foreground(black, grass, red, white);
+  landar = new Landingareas(deafaultLandingArea);
   
   //window
   size(1000,600);
@@ -108,7 +111,7 @@ void setup(){
 void draw(){
   bkg.display();
   aln.inBackground();
-  drawLandingField();
+  landar.display();
   drawUFO();
   frg.display();
 }
@@ -349,7 +352,7 @@ void setLandingStatus(){
     horizontalSpeed = 0;
     
     // switch off landing highlighter
-    showLandingLine = false;
+    landar.hide();
     
     // start showing a small alien for nice landing
     if (niceLanding) {
@@ -402,7 +405,7 @@ void keyPressed(){
    // reset UFO
    resetUFO();
  } else if(key == 'l' || key == 'L'){
-   showLandingLine = ! showLandingLine;
+   landar.opposite();
  } else if(key == 'p' || key == 'P'){
    paused = ! paused;
  }
