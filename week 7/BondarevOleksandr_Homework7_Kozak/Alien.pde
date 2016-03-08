@@ -30,6 +30,7 @@ class Alien{
   //----------------------------------------
   void reset() {
     alienState = AlienState.INUFO;
+    beforeWait = 0;
   }
     
     
@@ -178,5 +179,4 @@ class Alien{
   void setX (float x) { alienX = x; }
   void setY (float y) { alienY = y; }
   
-  void setBeforeWait(long newVal) { long beforeWait = newVal;}
 }
