@@ -43,10 +43,8 @@ color road = color(200, 165, 130);
 color UFOStroke = color(55,240,240);
 
 //----------------------------------------
-// UFO
+// for UFO controls
 //----------------------------------------
-
-// for moving
 float distance;
 float horizontalSpeed;
 float posX;
@@ -59,11 +57,10 @@ boolean moveRight;
 boolean moveUp;
 int pointX = 700;
 int pointY = 210;
-String message;
-boolean landed;
-boolean niceLanding;
 
-// landing field
+//----------------------------------------
+// for UFO landing
+//----------------------------------------
 // Y
 int extremeHeight = 360;
 int handHeight = 260;
@@ -87,6 +84,7 @@ Foreground frg;
 Landingareas landar;
 Ufo ufo;
 
+
 //----------------------------------------
 void setup(){
   // initialize objects
@@ -103,6 +101,7 @@ void setup(){
   ufo.reset();
 } 
 
+
 //----------------------------------------
 void draw(){
   bkg.display();
@@ -111,6 +110,7 @@ void draw(){
   ufo.display();
   frg.display();
 }
+
 
 //------------------------------------------------------//
 //------------------------------------------------------//

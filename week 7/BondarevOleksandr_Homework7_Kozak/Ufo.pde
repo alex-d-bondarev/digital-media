@@ -4,11 +4,17 @@ class Ufo{
   //----------------------------------------
   //----------------------------------------
   // properties
+  boolean landed;
+  boolean niceLanding;
+  boolean paused;
+  
   color ufoMainColor = color(50,106,70);
+  
   float GRAVITY = 0.015;
   float TORQUE = 0.05;
   float WINDAGE = 0.005;
-  boolean paused;
+  
+  String message;
   
   //----------------------------------------
   //----------------------------------------
