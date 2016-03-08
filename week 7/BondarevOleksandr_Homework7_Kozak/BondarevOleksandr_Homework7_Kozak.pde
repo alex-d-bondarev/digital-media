@@ -2,7 +2,7 @@
 
 Added for homework week #7
 1. Updated code to meet OOP standards
-1.1 Removed extra variables, that are used only for specific classes, from main class
+1.1 Removed some variables, that are used only for specific classes, from main class
 */
 
 //------------------------------------------------------//
@@ -28,9 +28,6 @@ enum AlienState {
 //----------------------------------------
 // Colors
 //----------------------------------------
-color alien = color(180,170,140);
-color alienCloth = color(125,155,125);
-color alienNeck = color(215,240,240);
 color black = color(0);
 color white = color(255);
 color darkGrey = color(110, 95,  85);
@@ -93,15 +90,6 @@ int leftHillBottom = 540;
 int leftHillTop = pointX+20;
 int rightHillTop = pointX+230;
 
-//----------------------------------------
-// Alien
-//----------------------------------------
-AlienState alienState;
-float alienX;
-float alienY;
-float alienVelocity = 2;
-long timeToWait = 1000;
-
 
 //----------------------------------------
 // Other
@@ -149,7 +137,7 @@ void draw(){
 //         to starting point
 //----------------------------------------
 void resetUFO() {
-  alienState = AlienState.INUFO;
+  aln.reset();
   beforeWait = 0;
   posX = 100;
   posY = 20;
@@ -165,40 +153,6 @@ void resetUFO() {
   niceLanding = false;
 }
 
-
-
-//----------------------------------------
-// EFFECT: Change state of the alien 
-//         to a next state
-//----------------------------------------
-void alienNextState() {
-  switch(alienState){
-    case INUFO: 
-      alienState = AlienState.LANDED;
-      break;
-    case LANDED: 
-      alienState = AlienState.TOHILLENTRANCE;
-      break;
-    case TOHILLENTRANCE: 
-      alienState = AlienState.TOFIRSTPOINT;
-      break;
-    case TOFIRSTPOINT: 
-      alienState = AlienState.TOSECONDPOINT;
-      break;
-    case TOSECONDPOINT: 
-      alienState = AlienState.BETWEENHILLS;
-      break;
-    case BETWEENHILLS: 
-      alienState = AlienState.TOHILLTOP;
-      break;
-    case TOHILLTOP: 
-      alienState = AlienState.TOKOZAK;
-      break;
-    case TOKOZAK: 
-      alienState = AlienState.NEARKOZAK;
-      break;
-  }
-}
 
 
 //----------------------------------------
@@ -366,9 +320,9 @@ void setLandingStatus(){
       niceLanding = true;
       
       // change alien coordinates
-      alienX = posX;
-      alienY = posY-25;
-      alienNextState();
+      aln.setX(posX);
+      aln.setY(posY-25);
+      aln.nextState();
       
     // for landing on right part of big hill
     } else if(posX > rightHillTop && posY > handHeight) {
@@ -493,48 +447,4 @@ void mousePressed () {
   // adding to vertical and horizontal speed
   verticalSpeed = verticalSpeed - (mouseY - posY)/(2*distance);
   horizontalSpeed = horizontalSpeed - (mouseX - posX)/(2*distance);
-}
-
-//------------------------------------------------------//
-//------------- Draw simple static pictures ------------//
-//------------------------------------------------------//
-
-//----------------------------------------
-// GIVEN: x and y coordinates
-// EFFECT: draws a small alien in given
-//         coordinates
-//----------------------------------------
-void smallAlien(float aPosX, float aPosY) {
-  
-    // push picture to given coordinates
-    pushMatrix();
-    translate(aPosX, aPosY);
-    
-    // draw a small alien           
-    fill(alienCloth);
-    ellipse(0,-15, 35, 50);
-    fill(alien);
-    arc(0,-15, 35, 50, 1.10*PI, 1.90*PI, CHORD);
-    fill(alienNeck);
-    ellipse(0,-22, 40,5);
-    
-    // draw eyes
-    stroke(white);
-    strokeWeight(6);
-    point(-5,-33);
-    point(5,-33);
-    
-    // draw hands and legs
-    stroke(black);
-    line(-20, -15, -20, 0);
-    line(20, -15, 20, 0);
-    line(-5, 10, 5, 10);
-    
-    // draw hair and mustache
-    strokeWeight(1);
-    line(0,-40, 0, -50);
-    line(0,-27, -20, -30);
-    line(0,-27, 20, -30);    
-    
-    popMatrix();
 }

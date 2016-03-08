@@ -4,7 +4,15 @@ class Alien{
   //----------------------------------------
   //----------------------------------------
   // properties
-  
+  color alien = color(180,170,140);
+  color alienCloth = color(125,155,125);
+  color alienNeck = color(215,240,240);
+  AlienState alienState;
+  float alienX;
+  float alienY;
+  float alienVelocity = 2;
+  long timeToWait = 1000;
+    
   //----------------------------------------
   //----------------------------------------
   // constructor
@@ -16,6 +24,13 @@ class Alien{
   //----------------------------------------
   // methods
   
+  //----------------------------------------
+  // Effect: resets alien state
+  //----------------------------------------
+  void reset() {
+    alienState = AlienState.INUFO;
+  }
+    
     
   //----------------------------------------
   // Effect: draws and moves small alien
@@ -51,6 +66,7 @@ class Alien{
         moveAlienToCoordinate(910, 570);
     }
   }
+  
   
   //----------------------------------------
   // GIVEN: x and y coordinates
@@ -152,4 +168,12 @@ class Alien{
       
       popMatrix();
   }
+  
+  
+  //----------------------------------------
+  // GIVEN: x or y coordinate
+  // EFFECT: set new coordinate
+  //----------------------------------------
+  void setX (float x) { alienX = x; }
+  void setY (float y) { alienY = y; }
 }
