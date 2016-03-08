@@ -135,47 +135,6 @@ void resetUFO() {
 }
 
 
-
-
-//----------------------------------------
-// Move UFO
-//----------------------------------------
-void moveUFO(){
-  // update by controls
-  if(moveRight) { 
-    horizontalSpeed+=TORQUE/2; 
-    verticalSpeed-=TORQUE/4; 
-  } if(moveLeft) { 
-    horizontalSpeed-=TORQUE/2;
-    verticalSpeed-=TORQUE/4;  
-  } if(moveUp) { 
-    verticalSpeed-=TORQUE; 
-  }
-  
-  // update by gravity
-  verticalSpeed += GRAVITY;
-  // update by windage
-  if(horizontalSpeed > 0){
-    horizontalSpeed-= WINDAGE;
-  } else if (horizontalSpeed < 0) {
-    horizontalSpeed+= WINDAGE;
-  }
-  
-  // check if UFO landed
-  setLandingStatus();
-
-  
-  // update position
-  posX += horizontalSpeed;
-  posY += verticalSpeed;
-  
-  // out of the screen
-  if(posX < -30) { posX = 1030; }
-  if(posX > 1030){ posX = -30; } 
-  if(posY < 0) { verticalSpeed = 0; }
-}
-
-
 //----------------------------------------
 // Handle landing
 //----------------------------------------
