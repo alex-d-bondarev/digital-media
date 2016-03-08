@@ -121,7 +121,6 @@ void draw(){
 //----------------------------------------
 void resetUFO() {
   aln.reset();
-  aln.setBeforeWait(0);
   posX = 100;
   posY = 20;
   horizontalSpeed = 0;
