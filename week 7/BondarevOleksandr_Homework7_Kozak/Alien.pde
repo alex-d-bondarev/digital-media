@@ -7,6 +7,8 @@ class Alien{
   AlienState alienState;
   float alienX;
   float alienY;
+  float alienVelocity = 2;
+  long timeToWait = 1000;
     
   //----------------------------------------
   //----------------------------------------

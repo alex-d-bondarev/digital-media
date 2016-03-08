@@ -93,12 +93,6 @@ int leftHillBottom = 540;
 int leftHillTop = pointX+20;
 int rightHillTop = pointX+230;
 
-//----------------------------------------
-// Alien
-//----------------------------------------
-float alienVelocity = 2;
-long timeToWait = 1000;
-
 
 //----------------------------------------
 // Other
@@ -456,48 +450,4 @@ void mousePressed () {
   // adding to vertical and horizontal speed
   verticalSpeed = verticalSpeed - (mouseY - posY)/(2*distance);
   horizontalSpeed = horizontalSpeed - (mouseX - posX)/(2*distance);
-}
-
-//------------------------------------------------------//
-//------------- Draw simple static pictures ------------//
-//------------------------------------------------------//
-
-//----------------------------------------
-// GIVEN: x and y coordinates
-// EFFECT: draws a small alien in given
-//         coordinates
-//----------------------------------------
-void smallAlien(float aPosX, float aPosY) {
-  
-    // push picture to given coordinates
-    pushMatrix();
-    translate(aPosX, aPosY);
-    
-    // draw a small alien           
-    fill(alienCloth);
-    ellipse(0,-15, 35, 50);
-    fill(alien);
-    arc(0,-15, 35, 50, 1.10*PI, 1.90*PI, CHORD);
-    fill(alienNeck);
-    ellipse(0,-22, 40,5);
-    
-    // draw eyes
-    stroke(white);
-    strokeWeight(6);
-    point(-5,-33);
-    point(5,-33);
-    
-    // draw hands and legs
-    stroke(black);
-    line(-20, -15, -20, 0);
-    line(20, -15, 20, 0);
-    line(-5, 10, 5, 10);
-    
-    // draw hair and mustache
-    strokeWeight(1);
-    line(0,-40, 0, -50);
-    line(0,-27, -20, -30);
-    line(0,-27, 20, -30);    
-    
-    popMatrix();
 }
