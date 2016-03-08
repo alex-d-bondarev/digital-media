@@ -42,6 +42,26 @@ class Ufo{
     paused = false;
     niceLanding = false;
   }
+  
+  
+  //--------------------------------------------------------------------------------
+  // Effect: set UFO variables to starting point
+  //--------------------------------------------------------------------------------
+  void reset() {
+    aln.reset();
+    landar.hide();
+    posX = 100;
+    posY = 20;
+    horizontalSpeed = 0;
+    verticalSpeed = 0;
+    moveRight = false;
+    moveLeft = false;
+    moveUp = false;
+    landed = false;
+    paused = false;
+    niceLanding = false;
+  }
+  
     
   //--------------------------------------------------------------------------------
   // Effect: draws UFO 
