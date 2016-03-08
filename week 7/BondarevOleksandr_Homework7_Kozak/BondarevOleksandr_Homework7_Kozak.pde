@@ -112,7 +112,7 @@ long beforeWait;
 //----------------------------------------
 // Declare classes
 //----------------------------------------
-
+Alien aln;
 Background bkg;
 Foreground frg;
 
@@ -120,6 +120,7 @@ Foreground frg;
 //----------------------------------------
 void setup(){
   // initialize objects
+  aln = new Alien();
   bkg = new Background(black, grass, white);
   frg = new Foreground(black, red, white);
   
@@ -133,7 +134,7 @@ void setup(){
 //----------------------------------------
 void draw(){
   bkg.display();
-  drawSmallAlien();
+  aln.inBackground();
   drawLandingField();
   drawUFO();
   frg.display();
@@ -164,67 +165,6 @@ void resetUFO() {
   niceLanding = false;
 }
 
-
-//----------------------------------------
-// Effect: draws and moves small alien
-//----------------------------------------
-void drawSmallAlien() { 
-  
-  // right after the landing
-  if(alienState == AlienState.LANDED) {
-      smallAlien(alienX, alienY);
-      
-      // give alien some time to understand what is going on (wait timeToWait)
-      if (beforeWait == 0) { beforeWait = millis(); }
-      if (millis() - beforeWait > timeToWait) { alienNextState(); }
-      
-  // start mooving to field entrance
-  } else if ( alienState == AlienState.TOHILLENTRANCE ){
-      smallAlien(alienX, alienY);
-      moveAlienToCoordinate(750, 250);
-      
-  // start mooving to first point
-  } else if ( alienState == AlienState.TOFIRSTPOINT ){
-      smallAlien(alienX, alienY);
-      moveAlienToCoordinate(735, 330);
-      
-  // start mooving to second point
-  } else if ( alienState == AlienState.TOSECONDPOINT ) {
-      smallAlien(alienX, alienY);
-      moveAlienToCoordinate(840, 330);
-      
-  // start mooving out of the sight
-  } else if ( alienState == AlienState.BETWEENHILLS ) {
-      smallAlien(alienX, alienY);
-      moveAlienToCoordinate(910, 570);
-  }
-}
-
-
-//----------------------------------------
-// GIVEN: x and y coordinates
-// EFFECT: moves alien to given coordinates
-//         changes status to next when coming
-//----------------------------------------
-void moveAlienToCoordinate(int trgtX, int trgtY) { 
-  if (alienX != trgtX || alienY != trgtY) {          
-    alienX = moveToCoordinate(alienX,trgtX);
-    alienY = moveToCoordinate(alienY,trgtY);
-  } else { alienNextState(); }
-}
-
-
-//----------------------------------------
-// GIVEN: current and target coordinates
-// EFFECT: makes 1 step towards given 
-//         coordinates. Step is taken 
-//         according to aliens' velocity
-//----------------------------------------
-float moveToCoordinate(float cur, float trgt) {
-  if (cur > trgt + alienVelocity) { return cur - alienVelocity; } 
-  else if (cur < trgt - alienVelocity) { return cur + alienVelocity; }
-  else { return trgt; }
-}
 
 
 //----------------------------------------
