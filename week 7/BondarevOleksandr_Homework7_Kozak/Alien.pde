@@ -11,6 +11,7 @@ class Alien{
   float alienX;
   float alienY;
   float alienVelocity = 2;
+  long beforeWait;
   long timeToWait = 1000;
     
   //----------------------------------------
@@ -176,4 +177,6 @@ class Alien{
   //----------------------------------------
   void setX (float x) { alienX = x; }
   void setY (float y) { alienY = y; }
+  
+  void setBeforeWait(long newVal) { long beforeWait = newVal;}
 }

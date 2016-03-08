@@ -33,8 +33,6 @@ color white = color(255);
 color grass = color(70,  100, 40);
 color orange = color(245,170,0);
 color red = color(210,50,50);
-color water = color(160, 175, 240);
-color wheat = color(180, 180, 65);
 color road = color(200, 165, 130);
 color UFOFill = color(50,106,70);
 color UFOStroke = color(55,240,240);
@@ -85,12 +83,6 @@ int rightHillTop = pointX+230;
 
 
 //----------------------------------------
-// Other
-//----------------------------------------
-long beforeWait;
-
-
-//----------------------------------------
 // Declare classes
 //----------------------------------------
 Alien aln;
@@ -131,7 +123,7 @@ void draw(){
 //----------------------------------------
 void resetUFO() {
   aln.reset();
-  beforeWait = 0;
+  aln.setBeforeWait(0);
   posX = 100;
   posY = 20;
   horizontalSpeed = 0;
