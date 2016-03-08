@@ -34,14 +34,14 @@ class Landingareas{
         highlighField = ! highlighField;
       } 
       if(highlighField) {
-        // draw blue/safe landing zone
-        stroke(UFOStroke);
-        fill(UFOStroke);
+        // draw safe landing zone
+        stroke(goodArea);
+        fill(goodArea);
         rect(leftHillTop,hillHeight, rightHillTop-leftHillTop, 40);
         
-        // draw red/unsafe landing zone
-        stroke(red);
-        fill(red);
+        // draw unsafe landing zone
+        stroke(badArea);
+        fill(badArea);
         
         //head landing
         rect(leftHeadEdge,headHeight, rightHeadEdge-leftHeadEdge,20);
