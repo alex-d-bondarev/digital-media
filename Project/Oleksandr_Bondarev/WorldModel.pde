@@ -6,6 +6,11 @@ class WorldModel{
   
   Instructions info;
   LogicGame game;
+  Alien aln;
+  Background bkg;
+  Foreground frg;
+  Landingareas landar;
+  Ufo ufo;
   
   
   //================================================================================
@@ -13,8 +18,15 @@ class WorldModel{
   //================================================================================
   WorldModel(int act) {
     currentAct = act;
+    
+    // initialize objects
+    aln = new Alien();
+    bkg = new Background();
+    frg = new Foreground();
     game = new LogicGame();
     info = new Instructions(game, this);
+    landar = new Landingareas(red, UFOStroke);
+    ufo = new Ufo(aln, landar);
   }
   
   
@@ -22,18 +34,93 @@ class WorldModel{
   // methods
   //================================================================================
   
+  
   //--------------------------------------------------------------------------------
   // EFFECT: displays data according to current act
   //--------------------------------------------------------------------------------
   void display() {
-    if (currentAct == 5) {
-      info.displayGuessInstructions();
-    } else if (currentAct == 6) {
-      game.play();
-    } else if (currentAct == 7) { 
-      projectStub(); // in project there will be an alien flying away
+    switch(currentAct){
+      case 1:
+        nextAct();
+        break;
+      case 2:
+        bkg.display();
+        aln.display();
+        landar.display();
+        ufo.display();
+        frg.display();
+        break;
+      case 3:
+        nextAct();
+        break;
+      case 4:
+        nextAct();
+        break;
+      case 5:
+        info.displayGuessInstructions();
+        break;
+      case 6:
+        game.play();
+        break;
+      case 7:
+        projectStub(); // in project there will be an alien flying away
+        break;
     }
   }
+
+
+  //--------------------------------------------------------------------------------
+  // EFFECT: Handle arrow keys (pressed)
+  //--------------------------------------------------------------------------------
+  void handleKeyPressed(){
+    if (currentAct == 2) {
+      ufo.handleKeyPressed();
+      landar.handleKeyPressed();
+    }
+  } 
+  
+  
+  //--------------------------------------------------------------------------------
+  // EFFECT: Handle arrow keys (reliesed)
+  //--------------------------------------------------------------------------------
+  void handleKeyReleased(){
+    if (currentAct == 2) {
+      ufo.handleKeyReleased();
+    }
+  } 
+  
+  
+  //--------------------------------------------------------------------------------
+  // EFFECT: Handle mouse clicks depending on current act
+  //--------------------------------------------------------------------------------
+  void handleMouseEvents() {
+    switch(currentAct){
+      case 2:
+        ufo.handleMousePressed();
+        break;
+      case 5:
+        info.handleMouseEvents();
+        break;
+      case 6:
+        game.handleMouseEvents();
+        break;
+      case 7:
+        currentAct = 5; // TODO: this is temp stub
+        break;
+    }
+  }
+  
+  
+  //--------------------------------------------------------------------------------
+  // EFFECT: go to the next act
+  //--------------------------------------------------------------------------------
+  void nextAct() {
+    if(currentAct == 5) {
+      game.reset(this);
+    }
+    currentAct++;
+  }
+  
   
   //--------------------------------------------------------------------------------
   // EFFECT: temporary stub
@@ -58,31 +145,5 @@ class WorldModel{
     textSize(20);
     text(gameResult, 100, 100, 800, 400);
     text(finalText1 + finalText2, 100, 400, 800, 400);
-  }
-  
-  //--------------------------------------------------------------------------------
-  // EFFECT: Handle mouse clicks depending on current act
-  //--------------------------------------------------------------------------------
-  void handleMouseEvents() {
-    
-    if (currentAct == 5) {
-      info.handleMouseEvents();
-      
-    } else if (currentAct == 6){
-      game.handleMouseEvents();
-      
-    } else {
-      currentAct = 5;
-    }
-  }
-  
-  //--------------------------------------------------------------------------------
-  // EFFECT: go to the next act
-  //--------------------------------------------------------------------------------
-  void nextAct() {
-    if(currentAct == 5) {
-      game.reset(this);
-    }
-    currentAct++;
   }
 }

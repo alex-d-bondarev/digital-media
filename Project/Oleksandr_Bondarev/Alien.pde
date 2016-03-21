@@ -39,7 +39,7 @@ class Alien{
         
         // give alien some time to understand what is going on (wait timeToWait)
         if (beforeWait == 0) { beforeWait = millis(); }
-        if (millis() - beforeWait > timeToWait) { aln.nextState(); }
+        if (millis() - beforeWait > timeToWait) { nextState(); }
         
     //----------------------------------------    
     // start mooving to field entrance
@@ -120,7 +120,7 @@ class Alien{
     if (alienX != trgtX || alienY != trgtY) {          
       alienX = moveToCoordinate(alienX,trgtX);
       alienY = moveToCoordinate(alienY,trgtY);
-    } else { aln.nextState(); }
+    } else { nextState(); }
   }
   
   

@@ -1,6 +1,6 @@
-//------------------------------------------------------//
-//----------------- Global  Variables ------------------//
-//------------------------------------------------------//
+//=====================================================//
+//================= Global Variables ==================//
+//=====================================================//
 
 //--------------------------------------------------------------------------------
 // Global Colors
@@ -35,17 +35,8 @@ int rightHillTop = pointX+230;
 //--------------------------------------------------------------------------------
 // Other global variables
 //--------------------------------------------------------------------------------
-int firstAct = 5; // There will be acts 1-7, but in final project
+int firstAct = 1; 
 int[] guess = {0, 0, 0};
-
-//--------------------------------------------------------------------------------
-// Declare classes
-//--------------------------------------------------------------------------------
-Alien aln;
-Background bkg;
-Foreground frg;
-Landingareas landar;
-Ufo ufo;
 WorldModel world;
 
 
@@ -56,24 +47,14 @@ void setup(){
   //window
   size(1000,600);
   background(255);
-  frameRate(60);
   
-  // initialize objects
-  aln = new Alien();
-  bkg = new Background();
-  frg = new Foreground();
-  landar = new Landingareas(red, UFOStroke);
-  ufo = new Ufo(aln, landar);
+  // init WorldModel
+  world = new WorldModel(firstAct);
 } 
-
 
 //----------------------------------------
 void draw(){
-  bkg.display();
-  aln.display();
-  landar.display();
-  ufo.display();
-  frg.display();
+  world.display();
 }
 
 
@@ -85,21 +66,19 @@ void draw(){
 // EFFECT: Handle arrow keys (pressed)
 //--------------------------------------------------------------------------------
 void keyPressed(){
-  ufo.handleKeyPressed();
-  landar.handleKeyPressed();
+  world.handleKeyPressed();
 } 
-
 
 //--------------------------------------------------------------------------------
 // EFFECT: Handle arrow keys (reliesed)
 //--------------------------------------------------------------------------------
 void keyReleased(){
- ufo.handleKeyReleased();
+  world.handleKeyReleased();
 } 
 
 //--------------------------------------------------------------------------------
 // EFFECT: Handle mouse clicks
 //--------------------------------------------------------------------------------
 void mousePressed () {
-  ufo.handleMousePressed();
+  world.handleMouseEvents();
 }
