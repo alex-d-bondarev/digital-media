@@ -222,12 +222,12 @@ class Ufo{
         
       // for hand landing 
        } else if(posX > rightHeadEdge && posX < rightHandEdge 
-                                       && posY > handHeight && posY < handHeight+30) {
+                                      && posY > handHeight && posY < handHeight+30) {
         message = "Impossible!";
       
       // for head landing
        } else if(posX > leftHeadEdge && posX < rightHeadEdge 
-                                       && posY > headHeight && posY < headHeight+20) {
+                                     && posY > headHeight && posY < headHeight+20) {
         message = "???";
       
       // for far hills landing
@@ -304,17 +304,10 @@ class Ufo{
      // reset UFO
      reset();
    } else if(key == 'p' || key == 'P'){
-     pausedOpposite();
+     paused = ! paused;
    }
   } 
-
-
-  //--------------------------------------------------------------------------------
-  // Effect: changes value of "paused" to opposite value
-  //--------------------------------------------------------------------------------
-  void pausedOpposite() {
-    paused = ! paused;
-  }
+  
   
   //--------------------------------------------------------------------------------
   // EFFECT: Handle arrow keys (reliesed)

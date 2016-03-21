@@ -2,19 +2,22 @@ class Background {
   //================================================================================
   // properties
   //================================================================================
-  Tree tree;
   color lightWheat;
   color water;
   color wheat;
+  color leaves;
+  color lightLeaves;
   
   //================================================================================
   // constructor
   //================================================================================
   Background() {
-    tree = new Tree();
     lightWheat = color(214, 190, 65);
     water = color(160, 175, 240);
     wheat = color(180, 180, 65);
+    // tree colors
+    leaves = color(60,  120, 20);
+    lightLeaves = color(105, 160, 70); 
   }
   
   //================================================================================
@@ -85,13 +88,13 @@ class Background {
     // hills in background
     fill(lightWheat);
     ellipse(400, 550, 1000, 500);
-    tree.display(400,295);
-    tree.display(420,290);
-    tree.display(445,300);
+    drawTree(400,295);
+    drawTree(420,290);
+    drawTree(445,300);
     
     fill(lightWheat);
     ellipse(330, 530, 600, 500);
-    tree.display(290,360);
+    drawTree(290,360);
     
     fill(lightWheat);
     ellipse(50, 450, 400, 400);
@@ -101,7 +104,7 @@ class Background {
     // small forest in the left middle part of the screen
     for(int y=230; y<=400 ; y+=20) {
       for(int x=0; x<=20 + y%210; x+=20) {
-        tree.display(x,y);
+        drawTree(x,y);
         if (y<340) { y+=5; }
       }
     }
@@ -113,7 +116,7 @@ class Background {
     // 1 short line of trees near the river
     int treeLineY = 400;
     for(int x=10; x<=100; x+=25) {
-      tree.display(x,treeLineY);
+      drawTree(x,treeLineY);
       treeLineY -= 25;
     }
     
@@ -153,5 +156,37 @@ class Background {
     bezierVertex(820,270, 700,295, 775,325);
     bezierVertex(775,325, 940,340, 930,470);
     endShape();
+  }
+  
+  
+  //--------------------------------------------------------------------------------
+  // Given: x and y coordinates 
+  // Effect: draws a tree in given coordinates
+  //--------------------------------------------------------------------------------
+  void drawTree(float x, float y) {
+    // move to given positions
+    pushMatrix();
+    translate(x, y);
+    
+    //----------------------------------------
+    // set a tree shape
+    noStroke();  
+    fill(lightLeaves);
+    ellipse(0, 0, 30, 60);
+    
+    //----------------------------------------
+    // set a shadow/leaves
+    fill(leaves);  
+    beginShape();
+    vertex(-7,-28);
+    bezierVertex(-7,-28, -15,0,    0,0);
+    bezierVertex(0,0,     10,5,    7,28);
+    bezierVertex(7,28,    30,-30, -7,-28);
+    endShape();
+    
+    //----------------------------------------
+    // finish drawing a tree
+    stroke(1);  
+    popMatrix();
   }
 }

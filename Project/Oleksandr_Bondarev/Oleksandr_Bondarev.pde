@@ -32,6 +32,11 @@ int leftHillBottom = 540;
 int leftHillTop = pointX+20;
 int rightHillTop = pointX+230;
 
+//--------------------------------------------------------------------------------
+// Other global variables
+//--------------------------------------------------------------------------------
+int firstAct = 5; // There will be acts 1-7, but in final project
+int[] guess = {0, 0, 0};
 
 //--------------------------------------------------------------------------------
 // Declare classes
@@ -40,7 +45,8 @@ Alien aln;
 Background bkg;
 Foreground frg;
 Landingareas landar;
-Ufo ufo; // TODO refactor UFO
+Ufo ufo;
+WorldModel world;
 
 
 //=====================================================//
