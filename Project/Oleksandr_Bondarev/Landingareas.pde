@@ -3,7 +3,7 @@ class Landingareas{
   
   //================================================================================
   // properties
-  boolean deafaultLandingArea = false;
+  boolean deafaultLandingArea;
   boolean highlighField;
   boolean showLandingLine;
   color badArea;
@@ -13,6 +13,7 @@ class Landingareas{
   // constructor
   Landingareas(color bad, color good) {
     badArea = bad;
+    deafaultLandingArea = false;
     goodArea = good;
   }
   

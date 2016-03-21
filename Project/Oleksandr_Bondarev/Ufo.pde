@@ -7,18 +7,21 @@ class Ufo{
   boolean niceLanding;
   boolean paused;
   
-  color ufoMainColor = color(50,106,70);
+  color ufoMainColor;
   
-  float GRAVITY = 0.015;
-  float TORQUE = 0.05;
-  float WINDAGE = 0.005;
+  float GRAVITY;
+  float TORQUE;
+  float WINDAGE;
   
   String message;
   
   //================================================================================
   // constructor
   Ufo() {
-    
+    ufoMainColor = color(50,106,70);
+    GRAVITY = 0.015;
+    TORQUE = 0.05;
+    WINDAGE = 0.005;
   }
   
   //================================================================================
