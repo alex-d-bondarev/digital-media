@@ -6,12 +6,18 @@ class Ufo{
   boolean landed;
   boolean niceLanding;
   boolean paused;
+  boolean moveLeft;
+  boolean moveRight;
+  boolean moveUp;
   
   color ufoMainColor;
   
   float GRAVITY;
   float TORQUE;
   float WINDAGE;
+  
+  float posX;
+  float posY;
   
   String message;
   
@@ -269,6 +275,33 @@ class Ufo{
       }
     }  
   }
+  
+  
+  //--------------------------------------------------------------------------------
+  // EFFECT: Handle arrow keys (pressed)
+  //--------------------------------------------------------------------------------
+  void handleKeyPressed(){
+   if(key == CODED){
+     switch(keyCode){
+        case(RIGHT): 
+          moveRight = true;
+          break;
+        case(LEFT):  
+          moveLeft = true;
+          break;
+        case(UP):
+          moveUp = true;
+          break;
+      }
+      
+   //----------------------------------------   
+   } else if(key == ' ') {
+     // reset UFO
+     reset();
+   } else if(key == 'p' || key == 'P'){
+     pausedOpposite();
+   }
+  } 
 
 
   //--------------------------------------------------------------------------------
@@ -277,4 +310,33 @@ class Ufo{
   void pausedOpposite() {
     paused = ! paused;
   }
+  
+  //--------------------------------------------------------------------------------
+  // EFFECT: Handle arrow keys (reliesed)
+  //--------------------------------------------------------------------------------
+  void handleKeyReleased(){
+   moveRight = false;
+   moveLeft = false;
+   moveUp = false;
+  } 
+  
+
+  //--------------------------------------------------------------------------------
+  // Effect: makes some "wind"
+  //         wind power can be changed very little
+  //         wind angle depends on mouse position
+  //--------------------------------------------------------------------------------
+  void handleMousePressed() {
+    
+    // calculate whole distance from UFO to mouse
+    // by using Pythagorean theorem
+    distance = sqrt( pow(mouseX - posX, 2) 
+                   + pow(mouseY - posY, 2) );
+                   
+    // change speed by getting direction => (x1 - x2)^0
+    // multiplying by distance 
+    // adding to vertical and horizontal speed
+    verticalSpeed = verticalSpeed - (mouseY - posY)/(2*distance);
+    horizontalSpeed = horizontalSpeed - (mouseX - posX)/(2*distance);
+  } 
 }

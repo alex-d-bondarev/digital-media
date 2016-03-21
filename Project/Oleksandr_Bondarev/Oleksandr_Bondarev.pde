@@ -1,18 +1,10 @@
-/* Code Description
-
-Added for homework week #7
-1. Updated code to meet OOP standards
-1.1 Removed variables, that are used only for specific classes, from main class
-*/
-
-//=====================================================//
-//======================= Model =======================//
-//=====================================================//
-
 //------------------------------------------------------//
-//------------------------ Enums -----------------------//
+//----------------- Global  Variables ------------------//
 //------------------------------------------------------//
 
+//--------------------------------------------------------------------------------
+// Enums
+//--------------------------------------------------------------------------------
 enum AlienState {
     INUFO
     , LANDED
@@ -24,10 +16,6 @@ enum AlienState {
     , TOKOZAK
     , NEARKOZAK
 }
-
-//------------------------------------------------------//
-//---------------------- Variables ---------------------//
-//------------------------------------------------------//
 
 //--------------------------------------------------------------------------------
 // Global Colors
@@ -45,19 +33,14 @@ color UFOStroke = color(55,240,240);
 //--------------------------------------------------------------------------------
 float distance;
 float horizontalSpeed;
-float posX;
-float posY;
 float verticalSpeed;
 
 // for drawing
-boolean moveLeft;
-boolean moveRight;
-boolean moveUp;
 int pointX = 700;
 int pointY = 210;
 
 //--------------------------------------------------------------------------------
-// for UFO landing
+// Landing coordinates
 //--------------------------------------------------------------------------------
 // Y
 int extremeHeight = 360;
@@ -83,7 +66,9 @@ Landingareas landar;
 Ufo ufo;
 
 
-//----------------------------------------
+//=====================================================//
+//================ Main functionality =================//
+//=====================================================//
 void setup(){
   // initialize objects
   aln = new Alien();
@@ -113,39 +98,15 @@ void draw(){
 
 
 //=====================================================//
-//==================== Controller =====================//
+//================ Keyboard and Mouse =================//
 //=====================================================//
-
-//------------------------------------------------------//
-//---------------------- Keyboard ----------------------//
-//------------------------------------------------------//
 
 //--------------------------------------------------------------------------------
 // EFFECT: Handle arrow keys (pressed)
 //--------------------------------------------------------------------------------
 void keyPressed(){
- if(key == CODED){
-   switch(keyCode){
-      case(RIGHT): 
-        moveRight = true;
-        break;
-      case(LEFT):  
-        moveLeft = true;
-        break;
-      case(UP):
-        moveUp = true;
-        break;
-    }
-    
- //----------------------------------------   
- } else if(key == ' ') {
-   // reset UFO
-   ufo.reset();
- } else if(key == 'l' || key == 'L'){
-   landar.opposite();
- } else if(key == 'p' || key == 'P'){
-   ufo.pausedOpposite();
- }
+  ufo.handleKeyPressed();
+  landar.handleKeyPressed();
 } 
 
 
@@ -153,28 +114,12 @@ void keyPressed(){
 // EFFECT: Handle arrow keys (reliesed)
 //--------------------------------------------------------------------------------
 void keyReleased(){
- moveRight = false;
- moveLeft = false;
- moveUp = false;
+ ufo.handleKeyReleased();
 } 
 
-
-//------------------------------------------------------//
-//------------------------ Mouse -----------------------//
-//------------------------------------------------------// 
-// makes some "wind"
-// wind power can be changed very little
-// wind angle depends on mouse position
+//--------------------------------------------------------------------------------
+// EFFECT: Handle mouse clicks
+//--------------------------------------------------------------------------------
 void mousePressed () {
-  
-  // calculate whole distance from UFO to mouse
-  // by using Pythagorean theorem
-  distance = sqrt( pow(mouseX - posX, 2) 
-                 + pow(mouseY - posY, 2) );
-                 
-  // change speed by getting direction => (x1 - x2)^0
-  // multiplying by distance 
-  // adding to vertical and horizontal speed
-  verticalSpeed = verticalSpeed - (mouseY - posY)/(2*distance);
-  horizontalSpeed = horizontalSpeed - (mouseX - posX)/(2*distance);
+  ufo.handleMousePressed();
 }

@@ -23,8 +23,6 @@ class Tree {
   // Given: x and y coordinates 
   // Effect: draws a tree in given coordinates
   //--------------------------------------------------------------------------------
-  // NOTE:TODO: refactor after learning arrays
-  //            move x and y to constructor
   void display(float x, float y) {
     posX = x;
     posY = y;
