@@ -2,7 +2,7 @@ class Background {
 
   //================================================================================
   // properties
-  Tree tree;
+  ArrayList<Tree> trees;
   color lightWheat;
   color water;
   color wheat;
@@ -10,7 +10,7 @@ class Background {
   //================================================================================
   // constructor
   Background() {
-    tree = new Tree();
+    trees = new ArrayList<Tree>();
     lightWheat = color(214, 190, 65);
     water = color(160, 175, 240);
     wheat = color(180, 180, 65);
@@ -25,13 +25,12 @@ class Background {
   void display() {
     drawSky();
     drawNature();
+    drawTrees();
   }
   
   //--------------------------------------------------------------------------------
   // Effect: draws sky 
   //--------------------------------------------------------------------------------
-  // I did not get how to use gradient
-  // this is some kind of workaround
   void drawSky(){ 
     // set style
     int redVar = 50;
@@ -83,13 +82,13 @@ class Background {
     // hills in background
     fill(lightWheat);
     ellipse(400, 550, 1000, 500);
-    tree.display(400,295);
-    tree.display(420,290);
-    tree.display(445,300);
+    trees.add(new Tree(400,295));
+    trees.add(new Tree(420,290));
+    trees.add(new Tree(445,300));
     
     fill(lightWheat);
     ellipse(330, 530, 600, 500);
-    tree.display(290,360);
+    trees.add(new Tree(290,360));
     
     fill(lightWheat);
     ellipse(50, 450, 400, 400);
@@ -99,7 +98,7 @@ class Background {
     // small forest in the left middle part of the screen
     for(int y=230; y<=400 ; y+=20) {
       for(int x=0; x<=20 + y%210; x+=20) {
-        tree.display(x,y);
+        trees.add(new Tree(x,y));
         if (y<340) { y+=5; }
       }
     }
@@ -107,13 +106,6 @@ class Background {
     // grass hill
     fill(wheat);
     ellipse(150, 500, 350, 370);
-    
-    // 1 short line of trees near the river
-    int treeLineY = 400;
-    for(int x=10; x<=100; x+=25) {
-      tree.display(x,treeLineY);
-      treeLineY -= 25;
-    }
     
     //----------------------------------------
     // a river
@@ -151,5 +143,14 @@ class Background {
     bezierVertex(820,270, 700,295, 775,325);
     bezierVertex(775,325, 940,340, 930,470);
     endShape();
+  }
+  
+  //--------------------------------------------------------------------------------
+  // Effect: draws all trees from an array 
+  //--------------------------------------------------------------------------------
+  void drawTrees(){
+    for (Tree tree : trees) {
+      tree.display();
+    }
   }
 }
