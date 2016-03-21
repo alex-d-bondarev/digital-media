@@ -1,8 +1,7 @@
 class Alien{
-  
-  
   //================================================================================
   // properties
+  //================================================================================
   AlienState alienState;
   
   color alien;
@@ -15,9 +14,10 @@ class Alien{
   
   long beforeWait;
   long timeToWait = 1000;
-    
+  
   //================================================================================
   // constructor
+  //================================================================================
   Alien() {
     alien = color(180,170,140);
     alienCloth = color(125,155,125);
@@ -26,20 +26,12 @@ class Alien{
   
   //================================================================================
   // methods
-  
-  //--------------------------------------------------------------------------------
-  // Effect: resets alien state
-  //--------------------------------------------------------------------------------
-  void reset() {
-    alienState = AlienState.INUFO;
-    beforeWait = 0;
-  }
-    
+  //================================================================================
     
   //--------------------------------------------------------------------------------
   // Effect: draws and moves small alien
   //--------------------------------------------------------------------------------
-  void inBackground() { 
+  void display() { 
     
     // right after the landing
     if(alienState == AlienState.LANDED) {
@@ -73,6 +65,50 @@ class Alien{
         smallAlien(alienX, alienY);
         moveAlienToCoordinate(910, 570);
     }
+  }
+  
+    
+  //--------------------------------------------------------------------------------
+  // GIVEN: x and y coordinates
+  // EFFECT: draws a small alien in given coordinates
+  //--------------------------------------------------------------------------------
+  void smallAlien(float aPosX, float aPosY) {
+    
+      // push picture to given coordinates
+      pushMatrix();
+      translate(aPosX, aPosY);
+      
+      //----------------------------------------
+      // draw a small alien           
+      fill(alienCloth);
+      ellipse(0,-15, 35, 50);
+      fill(alien);
+      arc(0,-15, 35, 50, 1.10*PI, 1.90*PI, CHORD);
+      fill(alienNeck);
+      ellipse(0,-22, 40,5);
+      
+      //----------------------------------------
+      // draw eyes
+      stroke(white);
+      strokeWeight(6);
+      point(-5,-33);
+      point(5,-33);
+      
+      //----------------------------------------
+      // draw hands and legs
+      stroke(black);
+      line(-20, -15, -20, 0);
+      line(20, -15, 20, 0);
+      line(-5, 10, 5, 10);
+      
+      //----------------------------------------
+      // draw hair and mustache
+      strokeWeight(1);
+      line(0,-40, 0, -50);
+      line(0,-27, -20, -30);
+      line(0,-27, 20, -30);    
+      
+      popMatrix();
   }
   
   
@@ -133,48 +169,13 @@ class Alien{
     }
   }
   
-    
+  
   //--------------------------------------------------------------------------------
-  // GIVEN: x and y coordinates
-  // EFFECT: draws a small alien in given coordinates
+  // Effect: resets alien state
   //--------------------------------------------------------------------------------
-  void smallAlien(float aPosX, float aPosY) {
-    
-      // push picture to given coordinates
-      pushMatrix();
-      translate(aPosX, aPosY);
-      
-      //----------------------------------------
-      // draw a small alien           
-      fill(alienCloth);
-      ellipse(0,-15, 35, 50);
-      fill(alien);
-      arc(0,-15, 35, 50, 1.10*PI, 1.90*PI, CHORD);
-      fill(alienNeck);
-      ellipse(0,-22, 40,5);
-      
-      //----------------------------------------
-      // draw eyes
-      stroke(white);
-      strokeWeight(6);
-      point(-5,-33);
-      point(5,-33);
-      
-      //----------------------------------------
-      // draw hands and legs
-      stroke(black);
-      line(-20, -15, -20, 0);
-      line(20, -15, 20, 0);
-      line(-5, 10, 5, 10);
-      
-      //----------------------------------------
-      // draw hair and mustache
-      strokeWeight(1);
-      line(0,-40, 0, -50);
-      line(0,-27, -20, -30);
-      line(0,-27, 20, -30);    
-      
-      popMatrix();
+  void reset() {
+    alienState = AlienState.INUFO;
+    beforeWait = 0;
   }
   
   

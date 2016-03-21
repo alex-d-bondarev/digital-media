@@ -1,8 +1,7 @@
 class Ufo{
-
-  
   //================================================================================
   // properties
+  //================================================================================
   boolean landed;
   boolean niceLanding;
   boolean paused;
@@ -16,27 +15,29 @@ class Ufo{
   float TORQUE;
   float WINDAGE;
   
+  float distance;
+  float horizontalSpeed;
   float posX;
   float posY;
+  float verticalSpeed;
   
   String message;
   
+  Alien aln;
+  Landingareas landar;
+  
   //================================================================================
   // constructor
-  Ufo() {
+  //================================================================================
+  Ufo(Alien alien, Landingareas area) {
+    aln = alien;
+    landar = area;
     ufoMainColor = color(50,106,70);
     GRAVITY = 0.015;
     TORQUE = 0.05;
     WINDAGE = 0.005;
-  }
-  
-  //================================================================================
-  // methods
-  
-  //--------------------------------------------------------------------------------
-  // Effect: set UFO variables to starting point
-  //--------------------------------------------------------------------------------
-  void init() {
+    
+    // setup UFO
     aln.reset();
     landar.hide();
     posX = 100;
@@ -49,8 +50,12 @@ class Ufo{
     landed = false;
     paused = false;
     niceLanding = false;
+    
   }
   
+  //================================================================================
+  // methods
+  //================================================================================
   
   //--------------------------------------------------------------------------------
   // Effect: set UFO variables to starting point
