@@ -5,9 +5,9 @@ class Alien{
   // properties
   AlienState alienState;
   
-  color alien = color(180,170,140);
-  color alienCloth = color(125,155,125);
-  color alienNeck = color(215,240,240);
+  color alien;
+  color alienCloth;
+  color alienNeck;
   
   float alienX;
   float alienY;
@@ -19,7 +19,9 @@ class Alien{
   //================================================================================
   // constructor
   Alien() {
-    
+    alien = color(180,170,140);
+    alienCloth = color(125,155,125);
+    alienNeck = color(215,240,240);
   }
   
   //================================================================================

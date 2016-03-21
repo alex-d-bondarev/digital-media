@@ -2,21 +2,18 @@ class Background {
 
   //================================================================================
   // properties
-  color black;
-  color grass;
-  color lightWheat = color(214, 190, 65);
   Tree tree;
-  color water = color(160, 175, 240);
-  color wheat = color(180, 180, 65);
-  color white;
+  color lightWheat;
+  color water;
+  color wheat;
   
   //================================================================================
   // constructor
-  Background(color blackColor, color grassColor, color whiteColor) {
-    black = blackColor;
-    grass = grassColor;
+  Background() {
     tree = new Tree();
-    white = whiteColor;
+    lightWheat = color(214, 190, 65);
+    water = color(160, 175, 240);
+    wheat = color(180, 180, 65);
   }
   
   //================================================================================
