@@ -11,12 +11,9 @@ class Tree {
   
   //================================================================================
   // constructor
-  Tree(float x, float y) {
+  Tree() {
     leaves = color(60,  120, 20);
     lightLeaves = color(105, 160, 70); 
-    
-    posX = x;
-    posY = y;
   }
   
   //================================================================================
@@ -28,7 +25,9 @@ class Tree {
   //--------------------------------------------------------------------------------
   // NOTE:TODO: refactor after learning arrays
   //            move x and y to constructor
-  void display() {
+  void display(float x, float y) {
+    posX = x;
+    posY = y;
     // move to given positions
     pushMatrix();
     translate(posX, posY);
