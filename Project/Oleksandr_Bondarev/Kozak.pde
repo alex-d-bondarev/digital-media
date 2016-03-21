@@ -5,26 +5,23 @@ class Kozak {
 
   //================================================================================
   // properties
-  color cloth;
-  color dark;
-  color darkRed = color(120, 50,  50);
-  color darkGrey = color(110, 95,  85);
-  color skin = color(252, 189, 132);
-  color light;
+  color darkRed;
+  color darkGrey;
+  color skin;
   
   //================================================================================
   // constructor
-  Kozak(color inCloth, color inDark, color inLight) {
-    cloth = inCloth;
-    dark = inDark;
-    light = inLight; 
+  Kozak() {
+    darkRed = color(120, 50,  50);
+    darkGrey = color(110, 95,  85);
+    skin = color(252, 189, 132);
   }
   
   //================================================================================
   // methods
   
   //--------------------------------------------------------------------------------
-  // Effect: draws a tall kozak in red clothes
+  // Effect: draws a tall kozak in red Clothes
   //--------------------------------------------------------------------------------
   void display() {
   
@@ -36,7 +33,7 @@ class Kozak {
       
       //----------------------------------------
       // left boot
-      fill(dark);
+      fill(black);
       beginShape();
       vertex(165,440);
       bezierVertex(165,440, 150,455, 125,460);
@@ -48,7 +45,7 @@ class Kozak {
       
       //----------------------------------------
       // right boot
-      fill(dark);
+      fill(black);
       beginShape();
       vertex(220,445);
       bezierVertex(220,445, 250,450, 270,440);
@@ -65,7 +62,7 @@ class Kozak {
       pushMatrix();
       translate(100, 0); 
       
-      fill(cloth);
+      fill(red);
       beginShape();
       vertex(75,390);
       // left leg
@@ -131,7 +128,7 @@ class Kozak {
       
       //----------------------------------------
       // hat strip
-      fill(cloth);
+      fill(red);
       beginShape();
       vertex(113,97);
       vertex(113,170);
@@ -173,7 +170,7 @@ class Kozak {
       
       //----------------------------------------
       // draw a left mustache
-      fill(dark);
+      fill(black);
       beginShape();
       vertex(190,155);
       bezierVertex(190,155, 177,150, 165,165);
@@ -250,7 +247,7 @@ class Kozak {
       
       //----------------------------------------
       // draw a right hand
-      fill(cloth);
+      fill(red);
       beginShape();
       vertex(215,230);
       bezierVertex(215,240, 230,260, 240,290);
@@ -287,7 +284,7 @@ class Kozak {
       
       //----------------------------------------
       // draw a left hand
-      fill(cloth);
+      fill(red);
       beginShape();
       vertex(160, 195);
       bezierVertex(160,195, 145,195, 140,205);
@@ -320,9 +317,9 @@ class Kozak {
       
       //----------------------------------------
       // draw a right eye
-      fill(light);
+      fill(white);
       ellipse(200,137,10,15);
-      fill(dark);
+      fill(black);
       ellipse(199,139,5,7);
       
       //----------------------------------------
@@ -330,10 +327,10 @@ class Kozak {
       pushMatrix();
       translate(-15, 5);
       
-      fill(light);
+      fill(white);
       ellipseMode(CENTER);
       ellipse(200,135,10,15);
-      fill(dark);
+      fill(black);
       ellipse(199,137,5,7);
       popMatrix();
       
@@ -365,7 +362,7 @@ class Kozak {
       
       //----------------------------------------
       // connect right hand to body
-      stroke(cloth);
+      stroke(red);
       strokeWeight(8);
       line(215,202,225,218);
       strokeWeight(1);

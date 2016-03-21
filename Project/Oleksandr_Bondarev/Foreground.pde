@@ -2,19 +2,12 @@ class Foreground{
 
   //================================================================================
   // properties
-  color black;
   Kozak kzk;
-  color red;
-  color white;
   
   //================================================================================
   // constructor
-  Foreground(color blackColor, color grassColor, color redColor, color whiteColor) {
-    black = blackColor;
-    grass = grassColor;
-    red = redColor;
-    white = whiteColor;
-    kzk = new Kozak(red, black, white);
+  Foreground() {
+    kzk = new Kozak();
   }
   
   //================================================================================

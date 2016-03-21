@@ -88,7 +88,7 @@ void setup(){
   // initialize objects
   aln = new Alien();
   bkg = new Background();
-  frg = new Foreground(black, grass, red, white);
+  frg = new Foreground();
   landar = new Landingareas(red, UFOStroke);
   ufo = new Ufo();
   
