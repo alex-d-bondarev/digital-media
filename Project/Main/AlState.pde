@@ -1,7 +1,7 @@
 //--------------------------------------------------------------------------------
 // Contains alien state for alien's movement
 //--------------------------------------------------------------------------------
-enum AlienState {
+enum AlState {
     INUFO
     , LANDED
     , TOHILLENTRANCE

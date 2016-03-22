@@ -2,7 +2,7 @@ class Alien{
   //================================================================================
   // properties
   //================================================================================
-  AlienState alienState;
+  AlState alienState;
   
   color alien;
   color alienCloth;
@@ -34,7 +34,7 @@ class Alien{
   void display() { 
     
     // right after the landing
-    if(alienState == AlienState.LANDED) {
+    if(alienState == AlState.LANDED) {
         smallAlien(alienX, alienY);
         
         // give alien some time to understand what is going on (wait timeToWait)
@@ -43,25 +43,25 @@ class Alien{
         
     //----------------------------------------    
     // start mooving to field entrance
-    } else if ( alienState == AlienState.TOHILLENTRANCE ){
+    } else if ( alienState == AlState.TOHILLENTRANCE ){
         smallAlien(alienX, alienY);
         moveAlienToCoordinate(750, 250);
         
     //----------------------------------------    
     // start mooving to first point
-    } else if ( alienState == AlienState.TOFIRSTPOINT ){
+    } else if ( alienState == AlState.TOFIRSTPOINT ){
         smallAlien(alienX, alienY);
         moveAlienToCoordinate(735, 330);
         
     //----------------------------------------    
     // start mooving to second point
-    } else if ( alienState == AlienState.TOSECONDPOINT ) {
+    } else if ( alienState == AlState.TOSECONDPOINT ) {
         smallAlien(alienX, alienY);
         moveAlienToCoordinate(840, 330);
         
     //----------------------------------------    
     // start mooving out of the sight
-    } else if ( alienState == AlienState.BETWEENHILLS ) {
+    } else if ( alienState == AlState.BETWEENHILLS ) {
         smallAlien(alienX, alienY);
         moveAlienToCoordinate(910, 600);
     }
@@ -74,7 +74,7 @@ class Alien{
   void displayTall() { 
     //----------------------------------------    
     // start mooving closer
-    if ( alienState == AlienState.TOHILLTOP ) {
+    if ( alienState == AlState.TOHILLTOP ) {
         tallAlien(alienX, alienY);
         moveAlienToCoordinate(600, 30);
       }
@@ -87,10 +87,10 @@ class Alien{
   void displayCloser() { 
     //----------------------------------------    
     // move to Kozak
-    if ( alienState == AlienState.TOKOZAK ) {
+    if ( alienState == AlState.TOKOZAK ) {
         tallAlien(alienX, alienY);
         moveAlienToCoordinate(400, 190);
-      } else if (alienState == AlienState.NEARKOZAK ) {
+      } else if (alienState == AlState.NEARKOZAK ) {
         tallAlien(alienX, alienY);
       }
   }
@@ -170,28 +170,28 @@ class Alien{
   void nextState() {
     switch(alienState){
       case INUFO: 
-        alienState = AlienState.LANDED;
+        alienState = AlState.LANDED;
         break;
       case LANDED: 
-        alienState = AlienState.TOHILLENTRANCE;
+        alienState = AlState.TOHILLENTRANCE;
         break;
       case TOHILLENTRANCE: 
-        alienState = AlienState.TOFIRSTPOINT;
+        alienState = AlState.TOFIRSTPOINT;
         break;
       case TOFIRSTPOINT: 
-        alienState = AlienState.TOSECONDPOINT;
+        alienState = AlState.TOSECONDPOINT;
         break;
       case TOSECONDPOINT: 
-        alienState = AlienState.BETWEENHILLS;
+        alienState = AlState.BETWEENHILLS;
         break;
       case BETWEENHILLS: 
-        alienState = AlienState.TOHILLTOP;
+        alienState = AlState.TOHILLTOP;
         break;
       case TOHILLTOP: 
-        alienState = AlienState.TOKOZAK;
+        alienState = AlState.TOKOZAK;
         break;
       case TOKOZAK: 
-        alienState = AlienState.NEARKOZAK;
+        alienState = AlState.NEARKOZAK;
       case NEARKOZAK:
         break;
     }
@@ -202,7 +202,7 @@ class Alien{
   // Effect: resets alien state
   //--------------------------------------------------------------------------------
   void reset() {
-    alienState = AlienState.INUFO;
+    alienState = AlState.INUFO;
     beforeWait = 0;
   }
   

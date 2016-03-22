@@ -37,7 +37,7 @@ int rightHillTop = pointX+230;
 //--------------------------------------------------------------------------------
 int firstAct = 1; 
 int[] guess = {0, 0, 0};
-WorldModel world;
+World world;
 
 
 //=====================================================//
@@ -49,7 +49,7 @@ void setup(){
   background(255);
   
   // init WorldModel
-  world = new WorldModel(firstAct);
+  world = new World(firstAct);
 } 
 
 //----------------------------------------

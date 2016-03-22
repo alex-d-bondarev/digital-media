@@ -24,12 +24,12 @@ class Ufo{
   String message;
   
   Alien aln;
-  Landingareas landar;
+  Landing landar;
   
   //================================================================================
   // constructor
   //================================================================================
-  Ufo(Alien alien, Landingareas area) {
+  Ufo(Alien alien, Landing area) {
     aln = alien;
     landar = area;
     ufoMainColor = color(50,106,70);

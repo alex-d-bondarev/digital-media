@@ -37,7 +37,7 @@ class LogicGame{
   
   //----------------------------------------
   // Other
-  WorldModel model;
+  World model;
   
   
   //================================================================================
@@ -248,7 +248,7 @@ class LogicGame{
   //--------------------------------------------------------------------------------
   // EFFECT: set game difficulty
   //--------------------------------------------------------------------------------
-  void reset(WorldModel world){
+  void reset(World world){
     currentTry = 0;
     generateRandomCorrectVariant();
     guessToZero();

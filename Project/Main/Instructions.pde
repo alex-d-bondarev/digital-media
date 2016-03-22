@@ -10,12 +10,12 @@ class Instructions{
   
   String displayText;
   LogicGame game;
-  WorldModel model;
+  World model;
   
   //================================================================================
   // constructor
   //================================================================================
-  Instructions(LogicGame g, WorldModel world) {
+  Instructions(LogicGame g, World world) {
     game = g;
     model = world;
   }

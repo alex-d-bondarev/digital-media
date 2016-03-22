@@ -1,4 +1,4 @@
-class Landingareas{
+class Landing{
   //================================================================================
   // properties
   //================================================================================
@@ -11,7 +11,7 @@ class Landingareas{
   //================================================================================
   // constructor
   //================================================================================
-  Landingareas(color bad, color good) {
+  Landing(color bad, color good) {
     badArea = bad;
     deafaultLandingArea = false;
     goodArea = good;

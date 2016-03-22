@@ -1,4 +1,4 @@
-class WorldModel{
+class World{
   //================================================================================
   // properties
   //================================================================================
@@ -9,14 +9,14 @@ class WorldModel{
   Alien aln;
   Background bkg;
   Foreground frg;
-  Landingareas landar;
+  Landing landar;
   Ufo ufo;
   
   
   //================================================================================
   // constructor
   //================================================================================
-  WorldModel(int act) {
+  World(int act) {
     currentAct = act;
     
     // initialize objects
@@ -25,7 +25,7 @@ class WorldModel{
     frg = new Foreground();
     game = new LogicGame();
     info = new Instructions(game, this);
-    landar = new Landingareas(red, UFOStroke);
+    landar = new Landing(red, UFOStroke);
     ufo = new Ufo(aln, landar);
   }
   
