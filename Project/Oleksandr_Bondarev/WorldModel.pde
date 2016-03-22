@@ -40,23 +40,25 @@ class WorldModel{
   //--------------------------------------------------------------------------------
   void display() {
     switch(currentAct){
-      case 1:
+      case 1: //introduction
         nextAct();
         break;
-      case 2:
+      case 2: // catch meteors
+        nextAct();
+        break;
+      case 3: // landing information
+        nextAct();
+        break;
+      case 4: // landing
         bkg.display();
         aln.display();
         landar.display();
         ufo.display();
+        aln.displayTall();
         frg.display();
+        aln.displayCloser();
         break;
-      case 3:
-        nextAct();
-        break;
-      case 4:
-        nextAct();
-        break;
-      case 5:
+      case 5: 
         info.displayGuessInstructions();
         break;
       case 6:
@@ -73,7 +75,7 @@ class WorldModel{
   // EFFECT: Handle arrow keys (pressed)
   //--------------------------------------------------------------------------------
   void handleKeyPressed(){
-    if (currentAct == 2) {
+    if (currentAct == 4) {
       ufo.handleKeyPressed();
       landar.handleKeyPressed();
     }
@@ -84,7 +86,7 @@ class WorldModel{
   // EFFECT: Handle arrow keys (reliesed)
   //--------------------------------------------------------------------------------
   void handleKeyReleased(){
-    if (currentAct == 2) {
+    if (currentAct == 4) {
       ufo.handleKeyReleased();
     }
   } 
@@ -95,7 +97,7 @@ class WorldModel{
   //--------------------------------------------------------------------------------
   void handleMouseEvents() {
     switch(currentAct){
-      case 2:
+      case 4:
         ufo.handleMousePressed();
         break;
       case 5:
