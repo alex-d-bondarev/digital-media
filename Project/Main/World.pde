@@ -11,6 +11,7 @@ class World{
   Foreground frg;
   Landing landar;
   Ufo ufo;
+  Collect collectGame;
   
   
   //================================================================================
@@ -26,7 +27,10 @@ class World{
     game = new LogicGame();
     info = new Instructions(game, this);
     landar = new Landing(red, UFOStroke);
-    ufo = new Ufo(aln, landar);
+    ufo = new Ufo(this, aln, landar);
+    collectGame = new Collect(this, ufo);
+    
+    ufo.reset();
   }
   
   
@@ -44,7 +48,7 @@ class World{
         nextAct();
         break;
       case 2: // catch meteors
-        nextAct();
+        collectGame.display();
         break;
       case 3: // landing information
         nextAct();
@@ -75,8 +79,11 @@ class World{
   // EFFECT: Handle arrow keys (pressed)
   //--------------------------------------------------------------------------------
   void handleKeyPressed(){
-    if (currentAct == 4) {
+    if (currentAct == 2 || currentAct == 4) {
       ufo.handleKeyPressed();
+      landar.handleKeyPressed();
+    }
+    if (currentAct == 2 || currentAct == 4) {
       landar.handleKeyPressed();
     }
   } 
@@ -86,7 +93,7 @@ class World{
   // EFFECT: Handle arrow keys (reliesed)
   //--------------------------------------------------------------------------------
   void handleKeyReleased(){
-    if (currentAct == 4) {
+    if (currentAct == 2 || currentAct == 4) {
       ufo.handleKeyReleased();
     }
   } 
@@ -97,6 +104,9 @@ class World{
   //--------------------------------------------------------------------------------
   void handleMouseEvents() {
     switch(currentAct){
+      case 2:
+        ufo.handleMousePressed();
+        break;
       case 4:
         ufo.handleMousePressed();
         break;

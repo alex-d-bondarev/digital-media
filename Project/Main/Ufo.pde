@@ -8,6 +8,7 @@ class Ufo{
   boolean moveLeft;
   boolean moveRight;
   boolean moveUp;
+  boolean moveDown;
   
   color ufoMainColor;
   
@@ -25,11 +26,13 @@ class Ufo{
   
   Alien aln;
   Landing landar;
+  World world;
   
   //================================================================================
   // constructor
   //================================================================================
-  Ufo(Alien alien, Landing area) {
+  Ufo(World model, Alien alien, Landing area) {
+    world = model;
     aln = alien;
     landar = area;
     ufoMainColor = color(50,106,70);
@@ -47,6 +50,7 @@ class Ufo{
     moveRight = false;
     moveLeft = false;
     moveUp = false;
+    moveDown = false;
     landed = false;
     paused = false;
     niceLanding = false;
@@ -63,18 +67,59 @@ class Ufo{
   void reset() {
     aln.reset();
     landar.hide();
-    posX = 100;
-    posY = 20;
+    if(world.currentAct == 1 || world.currentAct == 2){
+      posY = 300;
+      posX = 500;
+    } else { 
+      posY = 20; 
+      posX = 100;
+    }
     horizontalSpeed = 0;
     verticalSpeed = 0;
     moveRight = false;
     moveLeft = false;
     moveUp = false;
+    moveDown = false;
     landed = false;
     paused = false;
     niceLanding = false;
   }
   
+  
+  void collect(){
+    pushMatrix();
+    translate(posX, posY);
+    
+    fill(255, 255, 10);
+    ellipse(0, 0, 60, 60);
+    
+    // set UFO style
+    fill(ufoMainColor);
+    stroke(UFOStroke);
+    
+    //----------------------------------------
+    // draw top
+    // it will open when landed nicely
+    if(niceLanding) {
+      rotate(radians(90));
+      arc(-20,-25, 40, 40, PI, 2*PI, CHORD);
+      rotate(radians(-90));
+    } else {
+      arc(0,0, 40, 40, PI, 2*PI, CHORD);
+    }
+    
+    //----------------------------------------
+    // draw body
+    arc(0,30,80,80, 1.15*PI, 1.85*PI, CHORD);
+  
+    // if not paused
+    // calculate GRAVITY force on UFO and move
+    if(!paused) { moveUFO(); }
+    
+    //----------------------------------------
+    strokeWeight(1);
+    popMatrix();
+  }
     
   //--------------------------------------------------------------------------------
   // Effect: draws UFO 
@@ -126,7 +171,6 @@ class Ufo{
     if(moveUp) {
       ellipse(0, 25, 10, 20);
     }
-      
     // draw "left" torque
     if(moveLeft){
       rotate(radians(-45));
@@ -143,6 +187,10 @@ class Ufo{
     //----------------------------------------
     strokeWeight(1);
     popMatrix();
+    
+    //----------------------------------------
+    // check if UFO landed
+    setLandingStatus();
   }
   
   
@@ -151,29 +199,22 @@ class Ufo{
   //--------------------------------------------------------------------------------
   void moveUFO(){
     // update by controls
-    if(moveRight) { 
-      horizontalSpeed+=TORQUE/2; 
-      verticalSpeed-=TORQUE/4; 
-    } if(moveLeft) { 
-      horizontalSpeed-=TORQUE/2;
-      verticalSpeed-=TORQUE/4;  
-    } if(moveUp) { 
-      verticalSpeed-=TORQUE; 
-    }
+    if(moveRight){ horizontalSpeed+=TORQUE; } 
+    if(moveLeft) { horizontalSpeed-=TORQUE; } 
+    if(moveUp) {   verticalSpeed-=TORQUE;   }
+    if(moveDown){  verticalSpeed+= TORQUE;  }
     
     //----------------------------------------
     // update by gravity
-    verticalSpeed += GRAVITY;
-    // update by windage
-    if(horizontalSpeed > 0){
-      horizontalSpeed-= WINDAGE;
-    } else if (horizontalSpeed < 0) {
-      horizontalSpeed+= WINDAGE;
+    if(world.currentAct == 4){
+      verticalSpeed += GRAVITY;
+      // update by windage
+      if(horizontalSpeed > 0){
+        horizontalSpeed-= WINDAGE;
+      } else if (horizontalSpeed < 0) {
+        horizontalSpeed+= WINDAGE;
+      }
     }
-    
-    //----------------------------------------
-    // check if UFO landed
-    setLandingStatus();
   
     //----------------------------------------
     // update position
@@ -184,7 +225,10 @@ class Ufo{
     // out of the screen
     if(posX < -30) { posX = 1030; }
     if(posX > 1030){ posX = -30; } 
-    if(posY < 0) { verticalSpeed = 0; }
+    if(world.currentAct == 2){
+      if (posY < -30) { posY = 630; }
+      else if (posY > 630) { posY = -30; }
+    } else if(posY < 0) { verticalSpeed = 0; }
   }
   
   
@@ -297,6 +341,9 @@ class Ufo{
         case(UP):
           moveUp = true;
           break;
+        case(DOWN):
+          moveDown = true;
+          break;
       }
       
    //----------------------------------------   
@@ -316,6 +363,7 @@ class Ufo{
    moveRight = false;
    moveLeft = false;
    moveUp = false;
+   moveDown = false;
   } 
   
 
