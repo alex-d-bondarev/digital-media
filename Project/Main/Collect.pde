@@ -23,17 +23,21 @@ class Collect{
   
   void display() {
     if (millis() - gameStartTime > gameTime) { 
-      world.nextAct(); 
-      ufo.reset();
+      if(ufo.energy > 0){
+        world.currentAct = 8;
+        ufo.reset();
+      } else {
+        world.nextAct(); 
+        ufo.reset();
+      }
     }
     if (millis() - gameStartTime > startPeriod) { startMeteors(); }
     
     ufo.collect();
     intersect();
     
-    // debug
     fill(255);
-    text(ufo.energy, 20, 20);
+    text("Energy " + ufo.energy, 20, 20);
     
     fill(50, 50, 100, 30);
     rect(0, 0, 1000, 600);

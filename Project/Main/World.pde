@@ -68,8 +68,13 @@ class World{
       case 6:
         game.play();
         break;
-      case 7:
-        projectStub(); // in project there will be an alien flying away
+      case 7: // regular ending
+        projectStub(); 
+        break;
+      case 8: // great pilot ending
+        background(0);
+        fill(255);
+        text("You are great pilot", 20, 20);
         break;
     }
   }
