@@ -21,6 +21,9 @@ class Ufo{
   float posX;
   float posY;
   float verticalSpeed;
+  float ufoRange;
+  
+  int energy;
   
   String message;
   
@@ -54,7 +57,8 @@ class Ufo{
     landed = false;
     paused = false;
     niceLanding = false;
-    
+    ufoRange = 45;
+    energy = 15;
   }
   
   //================================================================================
@@ -90,8 +94,7 @@ class Ufo{
     pushMatrix();
     translate(posX, posY);
     
-    fill(255, 255, 10);
-    ellipse(0, 0, 60, 60);
+    
     
     // set UFO style
     fill(ufoMainColor);

@@ -7,6 +7,7 @@ class Meteor {
   float growth = 0;
   float size = 5;
   color meteorColor;
+  float blowX, blowY, blowSize;
   
   Meteor() {
     switch(quality) {
@@ -32,6 +33,10 @@ class Meteor {
      fill(meteorColor, 240);
      noStroke();
      ellipse(x, y, size, size);
+     if (blowSize > 0 && blowSize < 200) {
+       ellipse(blowX, blowY, blowSize, blowSize);
+       blowSize += 25;
+     }
   }
 
   int getQuality() { return quality; }
@@ -42,6 +47,13 @@ class Meteor {
   void start() { 
     velocity += 1;
     growth = 0.15;
+  }
+  
+  void collect(){
+    blowX = x;
+    blowY = y;
+    blowSize = size;
+    x = -50;
   }
 
 }
