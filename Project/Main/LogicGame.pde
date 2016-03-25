@@ -8,17 +8,16 @@ class LogicGame{
   
   int currentTry;
   int maxTries = 7;
-  int numOfVariants = 4;
+  int numOfVariants = 3;
   
   int[] correctHistory = new int[maxTries];
   int[] correctVariant;
   
-  int[][] allVariants = {  {11, 12, 13, 14, 15},
-                           {21, 22, 23, 24, 25},
-                           {31, 32, 33, 34, 35},
-                           {41, 42, 43, 44, 45},
-                           {51, 52, 53, 54, 55}
-                         };
+  int[][] allVariants = {  {11, 12, 13, 14},
+                           {21, 22, 23, 24},
+                           {31, 32, 33, 34},
+                           {41, 42, 43, 44}
+                        };
   int[][] guessHistory;
   
   //----------------------------------------
@@ -246,7 +245,7 @@ class LogicGame{
 
 
   //--------------------------------------------------------------------------------
-  // EFFECT: set game difficulty
+  // EFFECT: reset game
   //--------------------------------------------------------------------------------
   void reset(World world){
     currentTry = 0;
@@ -316,7 +315,7 @@ class LogicGame{
       // down btn
       // increase only if current guess < 4
       if(givenBtnIsSelected(firstLineX+5+(shift*i),firstLineY + guessBoxSize + 20 +(shift*currentTry))){
-        if(guess[i] < 4) { guess[i]++; }
+        if(guess[i] < numOfVariants) { guess[i]++; }
       }
     }
   }
@@ -403,7 +402,7 @@ class LogicGame{
   // EFFECT: increase or decrease difficulty by 1 (it should be [0;5])
   //--------------------------------------------------------------------------------
   void increaseDifficulty(){
-    if(guess.length < 5) {
+    if(guess.length < 4) {
       guess = append(guess, 0);
     }
   }

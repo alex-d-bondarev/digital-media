@@ -62,8 +62,8 @@ class Instructions{
     //----------------------------------------
     // Difficulty
     shift += 80;
-    displayText = "Select game difficulty. \"1\" for easiest and \"5\" for hardest. \n\"3\" is suggested option.";
-    displayText = displayText + "\nYou can win \"4\" and \"5\" only with the help of luck.";
+    displayText = "Select game difficulty. \"1\" for easiest and \"4\" for hardest. \n\"3\" is suggested option.";
+    displayText = displayText + "\nYou can win \"4\" only with the help of luck.";
     text(displayText, width/5 + 5, height/5 + shift, width/2, height + 2*shift);
     
     // controls
