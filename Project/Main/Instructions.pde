@@ -68,7 +68,7 @@ class Instructions{
     
     // controls
     game.displayUpBtn(722, height/5 + shift-15);
-    game.guessBox(720, height/5 + shift, guess.length);
+    game.guessBox(720, height/5 + shift, str(guess.length));
     game.displayDownBtn(722, game.guessBoxSize + height/5 + shift + 5);
     
     //----------------------------------------

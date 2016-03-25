@@ -11,8 +11,7 @@ class World{
   Foreground frg;
   Landing landar;
   Ufo ufo;
-  Collect collectGame;
-  
+  Collect collectGame;  
   
   //================================================================================
   // constructor

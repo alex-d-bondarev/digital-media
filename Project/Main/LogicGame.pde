@@ -1,25 +1,25 @@
-class LogicGame{
+class LogicGame {
   //================================================================================
   // properties
   //================================================================================
-  
+
   // For game logic
   boolean won = false;
-  
+
   int currentTry;
   int maxTries = 7;
   int numOfVariants = 3;
-  
+
   int[] correctHistory = new int[maxTries];
   int[] correctVariant;
-  
-  int[][] allVariants = {  {11, 12, 13, 14},
-                           {21, 22, 23, 24},
-                           {31, 32, 33, 34},
-                           {41, 42, 43, 44}
-                        };
+
+  String[][] allVariants = {  {"11.jpg", "12.jpg", "13.jpg", "14.jpg"}, 
+    {"21.jpg", "22.jpg", "23.jpg", "24.jpg"}, 
+    {"31.jpg", "32.jpg", "33.jpg", "34.jpg"}, 
+    {"41.jpg", "42.jpg", "43.jpg", "44.jpg"}
+  };
   int[][] guessHistory;
-  
+
   //----------------------------------------
   // For UI
   int buttonWidth;
@@ -30,15 +30,17 @@ class LogicGame{
   int guessBoxSize;
   int radius;
   int shift;
-  
+
   String firstLine;
   String resultText;
-  
+
+  PImage icon;
+
   //----------------------------------------
   // Other
   World model;
-  
-  
+
+
   //================================================================================
   // constructor
   //================================================================================
@@ -53,115 +55,123 @@ class LogicGame{
     firstLine = "Guesses                                                                         Results";
     radius = 15;
   }
-  
-  
+
+
   //================================================================================
   // methods
   //================================================================================
-  
+
   //--------------------------------------------------------------------------------
   // EFFECT: play logic game
   //--------------------------------------------------------------------------------
   void play() {
     // clear background
     background(255);
-    
+
     //----------------------------------------
     // show play window
     fill(250, 230, 194);
     stroke(190, 150, 100);
     strokeWeight(5);
-    
+
     // draw a rectangle in the screen center, with size of half a screen
     rectMode(CORNER);
     rect(50, 50, 900, 500);
-    
+
     // change text color to dark brown and setup style
     fill(100, 60, 10);
     text(firstLine, 270, 100, 900, 50);
-    
+
     //----------------------------------------
     makeGuess();
   }
-  
+
   //--------------------------------------------------------------------------------
   // GIVEN: guess number
   // EFFECT: displays controlls that are needed for guess
   //--------------------------------------------------------------------------------
-  void makeGuess(){
+  void makeGuess() {
     strokeWeight(2);
-    
+
     // draw boxes based on game difficulty (guess.length) and number of try (currentTry)
     // use shift variable to shift boxes
-    for (int i = 0 ; i < guess.length; i++) {
+    for (int i = 0; i < guess.length; i++) {
       displayUpBtn(firstLineX+5+(shift*i), firstLineY+(shift*currentTry));
       guessBox(firstLineX+(shift*i), firstLineY+15+(shift*currentTry), allVariants[guess[i]][i]);
-      displayDownBtn(firstLineX+5+(shift*i),firstLineY + guessBoxSize + 20 +(shift*currentTry));
+      displayDownBtn(firstLineX+5+(shift*i), firstLineY + guessBoxSize + 20 +(shift*currentTry));
     }
-    
+
     // draw previous results
     // boxes
-    for (int i = 0 ; i < currentTry; i++) { // line
-      for(int j = 0; j < guess.length; j++) { // column
+    for (int i = 0; i < currentTry; i++) { // line
+      for (int j = 0; j < guess.length; j++) { // column
         guessBox(firstLineX+(shift*j), firstLineY+15+(shift*i), allVariants[guessHistory[i][j]][j]);
       }
       // number of correct results
       strokeWeight(5);
       textSize(20);
+      fill(190, 150, 100); 
       resultText = correctHistory[i] + " correct result(s)";
       text(resultText, confirmButtonX, firstLineY+40+(shift*i));
       strokeWeight(2);
       textSize(15);
     }
-    
+
     // confirm guess
     displayConfirmBtn(confirmButtonX, firstLineY+15+(shift*currentTry));
   }
-  
-  
+
+
   //--------------------------------------------------------------------------------
   // GIVEN: x and y coordinates of a button
   // EFFECT: displays up or down button in given coordinates
   //--------------------------------------------------------------------------------
-  void displayUpBtn(float x, float y){
+  void displayUpBtn(float x, float y) {
     // move to given coordinates
     pushMatrix();
     translate(x, y);
-    
+
     noStroke();
     changeFillColor(x, y);
     btnUp();
-    
+
     popMatrix();
   }
   //----------------------------------------
-  void displayDownBtn(float x, float y){
+  void displayDownBtn(float x, float y) {
     // move to given coordinates
     pushMatrix();
     translate(x, y);
-    
+
     noStroke();
     changeFillColor(x, y);
     btnDown();
-    
+
     popMatrix();
   }
-  
+
   //--------------------------------------------------------------------------------
   // GIVEN: coordinates
   // EFFECT: draws small guessbox in given coordinates
   //--------------------------------------------------------------------------------
-  void guessBox(int x, int y, int val) {
-    // box
-    fill(250, 230, 194); 
-    stroke(190, 150, 100);
-    rect(x, y, guessBoxSize, guessBoxSize, 2);
-    // text inside a box
-    fill(190, 150, 100); 
-    text(str(val), x+guessBoxSize/4, y+(guessBoxSize/1.5));
+  void guessBox(int x, int y, String val) {
+    // should be text for game instructions menu
+    if (val.equals("1") || val.equals("2") || val.equals("3") || val.equals("4")) {
+      // box
+      fill(250, 230, 194); 
+      stroke(190, 150, 100);
+      rect(x, y, guessBoxSize, guessBoxSize, 2);
+      // text inside a box
+      fill(190, 150, 100); 
+      text(val, x+guessBoxSize/4, y+(guessBoxSize/1.5));
+      // should show pictures for logic game
+    } else {
+      icon = loadImage(val);
+      image(icon, x+2, y, guessBoxSize, guessBoxSize);
+    }
   }
-  
-  
+
+
   //--------------------------------------------------------------------------------
   // GIVEN: x and y coordinates of a button
   // EFFECT: displays a confirm button in given coordinates
@@ -170,58 +180,58 @@ class LogicGame{
     // move to given coordinates
     pushMatrix();
     translate(x, y);
-    
+
     // set style
     ellipseMode(CORNER);
     stroke(10, 110, 70);
     changeCircleFillColor(x, y);
     ellipse(0, 0, radius*2, radius*2);
-    
+
     popMatrix();
   }
-  
-  
+
+
   //--------------------------------------------------------------------------------
   // GIVEN: x and y coordinates of a button
   // EFFECT: changes fill color, depending on mouse position
   //--------------------------------------------------------------------------------
   void changeFillColor(float x, float y) {
-    if(givenBtnIsSelected(x, y)) {
+    if (givenBtnIsSelected(x, y)) {
       fill(255);
     } else { 
-      fill(100, 255, 190); 
+      fill(100, 255, 190);
     }
   }
   //----------------------------------------
-  void changeCircleFillColor(float x, float y){
-    if(confirmIsSelected(x,y)) {
+  void changeCircleFillColor(float x, float y) {
+    if (confirmIsSelected(x, y)) {
       fill(255);
     } else { 
-      fill(100, 255, 190); 
+      fill(100, 255, 190);
     }
   }
-  
-  
+
+
   //--------------------------------------------------------------------------------
   // EFFECT: displays up or down button
   //--------------------------------------------------------------------------------
-  void btnUp(){
+  void btnUp() {
     rect(0, 0, buttonWidth, buttonHeight, 2);
-    
+
     stroke(10, 110, 70);
     line(2, buttonHeight-2, 12, 2);
     line(12, 2, buttonWidth-2, buttonHeight-2);
   }
   //----------------------------------------
-  void btnDown(){
+  void btnDown() {
     rect(0, 0, buttonWidth, buttonHeight, 2);
-    
+
     stroke(10, 110, 70);
     line(2, 2, 12, buttonHeight-2);
     line(12, buttonHeight-2, buttonWidth-2, 2);
   }
-  
-  
+
+
   //--------------------------------------------------------------------------------
   // GIVEN: coordinates of left top corner of up/down button
   // RETURN: true if mouse is over up/down button, else - false
@@ -229,14 +239,14 @@ class LogicGame{
   boolean givenBtnIsSelected(float x, float y) {
     return (mouseX >= x && mouseX <= x + buttonWidth && mouseY >= y && mouseY <= y + buttonHeight);
   }
-  
+
   //--------------------------------------------------------------------------------
   // GIVEN: coordinates of center of confirm button
   // RETURN: true if mouse is over confirm button, else - false
   //--------------------------------------------------------------------------------
   boolean confirmIsSelected(float x, float y) {
     float d = dist(mouseX, mouseY, x+radius, y+radius);  
-    if(d < radius) {
+    if (d < radius) {
       return true;
     } else { 
       return false;
@@ -247,31 +257,31 @@ class LogicGame{
   //--------------------------------------------------------------------------------
   // EFFECT: reset game
   //--------------------------------------------------------------------------------
-  void reset(World world){
+  void reset(World world) {
     currentTry = 0;
     generateRandomCorrectVariant();
     guessToZero();
     model = world;
     setHistory();
   }
-  
+
 
   //--------------------------------------------------------------------------------
   // EFFECT: generate random correct variant
   //--------------------------------------------------------------------------------
-  void generateRandomCorrectVariant(){
+  void generateRandomCorrectVariant() {
     correctVariant = new int[guess.length];
-    for(int i = 0; i < correctVariant.length; i++){
+    for (int i = 0; i < correctVariant.length; i++) {
       correctVariant[i] = int(random(numOfVariants));
     }
   }  
-  
-  
+
+
   //--------------------------------------------------------------------------------
   // EFFECT: fill guess array with "0" values
   //--------------------------------------------------------------------------------
-  void guessToZero(){
-    for(int i = 0; i < guess.length; i++) {
+  void guessToZero() {
+    for (int i = 0; i < guess.length; i++) {
       guess[i] = 0;
     }
   }
@@ -280,15 +290,15 @@ class LogicGame{
   //--------------------------------------------------------------------------------
   // EFFECT: set game difficulty
   //--------------------------------------------------------------------------------
-  void setHistory(){
+  void setHistory() {
     guessHistory = new int[maxTries][guess.length];
-    for(int i = 0; i < guessHistory.length; i++){
-      for(int j = 0; j < guess.length; j++){
+    for (int i = 0; i < guessHistory.length; i++) {
+      for (int j = 0; j < guess.length; j++) {
         guessHistory[i][j] = 0;
       }
     }
   }
-  
+
 
   //--------------------------------------------------------------------------------
   // EFFECT: handle mouse events
@@ -297,38 +307,42 @@ class LogicGame{
     setGuess();
     confirmGuess();
   }
-  
-  
+
+
   //--------------------------------------------------------------------------------
   // EFFECT: update guess value based on buttons
   //--------------------------------------------------------------------------------
-  void setGuess(){
-    for (int i = 0 ; i < guess.length; i++) {
+  void setGuess() {
+    for (int i = 0; i < guess.length; i++) {
       //----------------------------------------
       // up btn
       // reduce only if current guess > 0
-      if(givenBtnIsSelected(firstLineX+5+(shift*i), firstLineY+(shift*currentTry))){
-        if(guess[i] > 0) { guess[i]--; }
+      if (givenBtnIsSelected(firstLineX+5+(shift*i), firstLineY+(shift*currentTry))) {
+        if (guess[i] > 0) { 
+          guess[i]--;
+        }
       }
-      
+
       //----------------------------------------
       // down btn
       // increase only if current guess < 4
-      if(givenBtnIsSelected(firstLineX+5+(shift*i),firstLineY + guessBoxSize + 20 +(shift*currentTry))){
-        if(guess[i] < numOfVariants) { guess[i]++; }
+      if (givenBtnIsSelected(firstLineX+5+(shift*i), firstLineY + guessBoxSize + 20 +(shift*currentTry))) {
+        if (guess[i] < numOfVariants) { 
+          guess[i]++;
+        }
       }
     }
   }
-  
-  
+
+
   //--------------------------------------------------------------------------------
   // EFFECT: work with confirm button
   //--------------------------------------------------------------------------------
   void confirmGuess() {
-    if(confirmIsSelected(confirmButtonX, firstLineY+15+(shift*currentTry))){
+    if (confirmIsSelected(confirmButtonX, firstLineY+15+(shift*currentTry))) {
       if (currentTry < maxTries) {
         // save result in guess history
-        for(int i = 0; i < guess.length; i++) {
+        for (int i = 0; i < guess.length; i++) {
           guessHistory[currentTry][i] = guess[i];
         }
         // increment current Try
@@ -338,7 +352,7 @@ class LogicGame{
       }
     }
   }
-  
+
   //--------------------------------------------------------------------------------
   // EFFECT: should be impossible to win first try 
   //         confirm guess values. If all are guessed - win 
@@ -348,8 +362,8 @@ class LogicGame{
   void processGuess() {
     // count correct variants
     int counter = 0;
-    for(int i = 0; i < guess.length; i++) {
-      if(guess[i] == correctVariant[i]) {
+    for (int i = 0; i < guess.length; i++) {
+      if (guess[i] == correctVariant[i]) {
         counter++;
       }
     }
@@ -361,13 +375,13 @@ class LogicGame{
       processLooseScenario();
     }
   }
-  
-  
+
+
   //--------------------------------------------------------------------------------
   // EFFECT: process winning and loosing scenarios
   //--------------------------------------------------------------------------------
-  void processWinScenario(){
-    if(currentTry == 1) {            // should be impossible to win first try 
+  void processWinScenario() {
+    if (currentTry == 1) {            // should be impossible to win first try 
       notFirstTime();
     } else {                         // you won !!!
       won = true;
@@ -375,40 +389,40 @@ class LogicGame{
     }
   }
   //----------------------------------------
-  void processLooseScenario(){
-    if(currentTry >= maxTries) { // its a pity but you have lost :(                        
+  void processLooseScenario() {
+    if (currentTry >= maxTries) { // its a pity but you have lost :(                        
       won = false;
       world.nextAct();
     }
   }
-    
-  
+
+
   //--------------------------------------------------------------------------------
   // EFFECT: update random value of correct variant to new random value
   //--------------------------------------------------------------------------------
-  void notFirstTime(){
+  void notFirstTime() {
     boolean needNewVal = true;
-    while(needNewVal) {
+    while (needNewVal) {
       int newValue = int(random(numOfVariants));
       if (correctVariant[int(random(guess.length))] != newValue) {
         correctVariant[int(random(guess.length))] = newValue;
         needNewVal = false;
-      } 
+      }
     }
   }
-  
-  
+
+
   //--------------------------------------------------------------------------------
   // EFFECT: increase or decrease difficulty by 1 (it should be [0;5])
   //--------------------------------------------------------------------------------
-  void increaseDifficulty(){
-    if(guess.length < 4) {
+  void increaseDifficulty() {
+    if (guess.length < 4) {
       guess = append(guess, 0);
     }
   }
   //----------------------------------------
   void decreaseDifficulty() {
-    if(guess.length > 1) {
+    if (guess.length > 1) {
       guess = shorten(guess);
     }
   }
