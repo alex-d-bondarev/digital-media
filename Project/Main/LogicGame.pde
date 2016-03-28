@@ -166,7 +166,7 @@ class LogicGame {
       text(val, x+guessBoxSize/4, y+(guessBoxSize/1.5));
       // should show pictures for logic game
     } else {
-      icon = loadImage(val);
+      icon = loadImage("pics/" + val);
       image(icon, x+2, y, guessBoxSize, guessBoxSize);
     }
   }

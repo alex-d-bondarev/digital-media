@@ -2,6 +2,7 @@ class Collect{
   long gameTime = 22000;
   long gameStartTime = 0;
   long startPeriod = 500;
+  int energy;
   int numDrops = 0;
   Meteor[] drops = new Meteor[10];
   World world;
@@ -36,8 +37,7 @@ class Collect{
     ufo.collect();
     intersect();
     
-    fill(255);
-    text("Energy " + ufo.energy, 20, 20);
+    displayEnergy();
     
     fill(50, 50, 100, 30);
     rect(0, 0, 1000, 600);
@@ -84,5 +84,21 @@ class Collect{
         drops[i].collect();
       }
     }
+  }
+  
+  void displayEnergy(){
+    energy = ufo.energy;
+    
+    // empty rectangle
+    noFill();
+    stroke(orange);
+    strokeWeight(2);
+    rect(20,20,200,20);
+    // energy left
+    fill(orange);
+    rect(20, 20, energy*3, 20);
+    // energy number
+    text(energy, 120, 35);
+    noStroke();
   }
 }

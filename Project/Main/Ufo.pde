@@ -58,7 +58,7 @@ class Ufo{
     paused = false;
     niceLanding = false;
     ufoRange = 45;
-    energy = 16;
+    energy = 17;
   }
   
   //================================================================================
