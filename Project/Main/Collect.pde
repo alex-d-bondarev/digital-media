@@ -23,8 +23,29 @@ class Collect{
   }
   
   void display() {
-    if (millis() - gameStartTime > gameTime) { 
-      if(ufo.energy > 0){
+    energy = ufo.energy;
+    
+    transparentBackground();
+    endAct();
+    displayEnergy();    
+    ufo.collect();
+    intersect();
+    fallMeteors();    
+  }
+  
+  
+  void transparentBackground() {
+    fill(50, 50, 100, 30);
+    rect(0, 0, 1000, 600);
+  }
+  
+  
+  void endAct() {
+    if (energy == 0) {
+      world.nextAct(); 
+      ufo.reset();
+    } else if (millis() - gameStartTime > gameTime) { 
+      if(energy > 0){
         world.currentAct = 8;
         ufo.reset();
       } else {
@@ -32,28 +53,23 @@ class Collect{
         ufo.reset();
       }
     }
-    if (millis() - gameStartTime > startPeriod) { startMeteors(); }
-    
-    ufo.collect();
-    intersect();
-    
-    displayEnergy();
-    
-    fill(50, 50, 100, 30);
-    rect(0, 0, 1000, 600);
-    for(int i = 0; i < drops.length; i++) {
-        drops[i].fall();
-    }   
   }
   
-  void startMeteors() {
-    if (numDrops < drops.length) {
-      drops[numDrops].start();
-      numDrops ++;
-    }
-    startPeriod += 1000;
-    ufo.energy--;
+  
+  void displayEnergy(){
+    // empty rectangle
+    noFill();
+    stroke(orange);
+    strokeWeight(2);
+    rect(20,20,200,20);
+    // energy left
+    fill(orange);
+    rect(20, 20, energy*3, 20);
+    // energy number
+    text(energy, 120, 35);
+    noStroke();
   }
+  
   
   void intersect(){
     float x1 = ufo.posX;
@@ -86,19 +102,21 @@ class Collect{
     }
   }
   
-  void displayEnergy(){
-    energy = ufo.energy;
-    
-    // empty rectangle
-    noFill();
-    stroke(orange);
-    strokeWeight(2);
-    rect(20,20,200,20);
-    // energy left
-    fill(orange);
-    rect(20, 20, energy*3, 20);
-    // energy number
-    text(energy, 120, 35);
-    noStroke();
+  
+  void fallMeteors() {
+    if (millis() - gameStartTime > startPeriod) { startMeteors(); }
+    for(int i = 0; i < drops.length; i++) {
+        drops[i].fall();
+    }   
+  }
+  
+  
+  void startMeteors() {
+    if (numDrops < drops.length) {
+      drops[numDrops].start();
+      numDrops ++;
+    }
+    startPeriod += 1000;
+    ufo.energy--;
   }
 }

@@ -2,6 +2,10 @@ class Instructions{
   //================================================================================
   // properties
   //================================================================================
+  // Kokonor-24
+  color textBackground = color(250, 230, 194);
+  color textColor = color(100, 60, 10);
+  
   int btnHeight = 40;
   int btnWidth = 100;
   int continueX = 720;
@@ -12,12 +16,19 @@ class Instructions{
   LogicGame game;
   World model;
   
+  String instruction1= "This is a logical minigame, where you need to guess the correct sequence of ingredients.";
+  PFont f;
+  
   //================================================================================
   // constructor
   //================================================================================
   Instructions(LogicGame g, World world) {
     game = g;
     model = world;
+    
+    // set font
+    f = loadFont("Kokonor-24.vlw");
+    textFont(f);
   }
   
   //================================================================================
@@ -34,8 +45,9 @@ class Instructions{
     
     // Text line with introduction to the game
     shift = 0;
-    displayText = "This is a logical minigame, where you need to guess the correct sequence of ingredients.";
-    text(displayText, width/5 + 5, height/5, width/1.5 - 25, height + 2*shift);
+    //displayText = "This is a logical minigame, where you need to guess the correct sequence of ingredients.";
+    //text(displayText, width/5 + 5, height/5, width/1.5 - 25, height + 2*shift);
+    showText(width/5 + 5, height/5, width/1.5 - 25, height + 2*shift, instruction1);
     
     // Instructions
     shift += 60;
@@ -81,18 +93,33 @@ class Instructions{
   // EFFECT: shows text window to make text more readable
   //--------------------------------------------------------------------------------
   void showTextWindow(){
-    fill(250, 230, 194);
-    stroke(190, 150, 100);
-    strokeWeight(5);
+    background(textBackground);
+    noFill();
+    stroke(textColor);
+    strokeWeight(10);
     
-    // draw a rectangle in the screen center, with size of half a screen
+    // draw screen border
     rectMode(CENTER);
-    rect(width/2, height/2, (width/3)*2, (height/3)*2, 10);
+    rect(width/2, height/2, width, height, 10);
     
+    // reset stroke weight
+    strokeWeight(5);
     // change text color to dark brown and setup style
-    fill(100, 60, 10);
+    fill(textColor);
     rectMode(CORNER);
-    textSize(15);
+    textSize(24);
+  }
+  
+  
+  //--------------------------------------------------------------------------------
+  // EFFECT: show given text in given coordinates, of given size, with one preset style
+  //--------------------------------------------------------------------------------
+  void showText(float x, float y, float tWidth, float tHeight, String text){
+    // change text color to dark brown and setup style
+    fill(textColor);
+    rectMode(CORNER);
+    textSize(24);
+    text(text, x, y, tWidth, tHeight);
   }
   
   
