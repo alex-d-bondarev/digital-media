@@ -1,23 +1,33 @@
 class Instructions{
   //================================================================================
   // properties
-  //================================================================================
-  // Kokonor-24
-  color textBackground = color(250, 230, 194);
-  color textColor = color(100, 60, 10);
-  
+  //================================================================================  
   int btnHeight = 40;
   int btnWidth = 100;
-  int continueX = 720;
-  int continueY = 450;
-  int shift;
+  int continueX = 800;
+  int continueY = 520;
+  int textHeight = 50;
+  int textLeftEdge = 50;
   
-  String displayText;
+  // difficulty buttons' coordinates
+  int downX = 722;
+  int downY;
+  int upY = 430;
+  
+  // act 5 instructions
+  String introduction = "You see an alien. Why aren't you shocked? He is definitely shocked. Did you see his smile? \nOK, somehow you understand him. He said that he collects energy from rocks and that he needs you help. Help him to find energy efficient combination of rocks";
+  String instruction1 = "You will play a logical minigame, where you need to guess the correct sequence.";
+  String instruction2;
+  String instruction3 = "Press the following buttons to select optioin";
+  String instruction4 = "Press the following button to confirm guess";
+  String instruction5 = "Select game difficulty. \"1\" for easiest and \"4\" for hardest. \n\"3\" is suggested option.";
+  
+  // text font = Kokonor-24
+  PFont f;
+  
+  // variables for classes
   LogicGame game;
   World model;
-  
-  String instruction1= "This is a logical minigame, where you need to guess the correct sequence of ingredients.";
-  PFont f;
   
   //================================================================================
   // constructor
@@ -25,6 +35,9 @@ class Instructions{
   Instructions(LogicGame g, World world) {
     game = g;
     model = world;
+    
+    // more coordinates
+    downY = upY + 20 + game.guessBoxSize;
     
     // set font
     f = loadFont("Kokonor-24.vlw");
@@ -43,45 +56,34 @@ class Instructions{
     background(255);
     showTextWindow();
     
-    // Text line with introduction to the game
-    shift = 0;
-    //displayText = "This is a logical minigame, where you need to guess the correct sequence of ingredients.";
-    //text(displayText, width/5 + 5, height/5, width/1.5 - 25, height + 2*shift);
-    showText(width/5 + 5, height/5, width/1.5 - 25, height + 2*shift, instruction1);
+    // introduction
+    showText(textLeftEdge, 30, width - 100, textHeight*3, introduction);
+    showText(textLeftEdge, 170, width - 100, textHeight, instruction1);
     
     // Instructions
-    shift += 60;
-    displayText = "You will have " + game.maxTries + " tries. However the will be a hint that will show number of correct guesses, each time.";
-    text(displayText, width/5 + 5, height/5 + shift, width/1.5 - 25, height + 2*shift);
+    instruction2 = "You will have " + game.maxTries + " tries. However the will be a hint that will show number of correct guesses, each time.\nYou can win \"4\" only with the help of luck.";
+    showText(textLeftEdge, 240, width - 100, textHeight, instruction2);
     
     //----------------------------------------
     // Controlls 
-    shift += 60;
     
     // Up and down Buttons
-    displayText = "Press the following buttons to select optioin";
-    text(displayText, width/5 + 5, height/5 + shift, width/4.5 - 25, height + 2*shift);
-    game.displayUpBtn(400,250);
-    game.displayDownBtn(430,250);
-    fill(100, 60, 10);
+    showText(textLeftEdge, 310, 280, textHeight*2, instruction3);
+    game.displayUpBtn(340,340);
+    game.displayDownBtn(370,340);
     
     // confirm guess
-    displayText = "Press the following button to confirm guess";
-    text(displayText, 480, height/5 + shift, 220, height + 2*shift);
-    game.displayConfirmBtn(725, 230);
-    fill(100, 60, 10);
+    showText(480, 310, 280, textHeight*2, instruction4);
+    game.displayConfirmBtn(800, 320);
     
     //----------------------------------------
     // Difficulty
-    shift += 80;
-    displayText = "Select game difficulty. \"1\" for easiest and \"4\" for hardest. \n\"3\" is suggested option.";
-    displayText = displayText + "\nYou can win \"4\" only with the help of luck.";
-    text(displayText, width/5 + 5, height/5 + shift, width/2, height + 2*shift);
+    showText(textLeftEdge, 430, width - 100, textHeight*3, instruction5);
     
     // controls
-    game.displayUpBtn(722, height/5 + shift-15);
-    game.guessBox(720, height/5 + shift, str(guess.length));
-    game.displayDownBtn(722, game.guessBoxSize + height/5 + shift + 5);
+    game.displayUpBtn(downX, upY);
+    game.guessBox(720, 445, str(guess.length));
+    game.displayDownBtn(downX, downY);
     
     //----------------------------------------
     // finish instructions
@@ -104,10 +106,6 @@ class Instructions{
     
     // reset stroke weight
     strokeWeight(5);
-    // change text color to dark brown and setup style
-    fill(textColor);
-    rectMode(CORNER);
-    textSize(24);
   }
   
   
@@ -130,7 +128,7 @@ class Instructions{
   void continueBtn(float x, float y){
     // change fill color if mouse is over
     if(doContinue()) {
-      fill(255);
+      fill(white);
     } else { fill(250, 230, 194); }
     
     // set rect style and draw it
@@ -139,9 +137,8 @@ class Instructions{
     rectMode(CORNER);
     rect(x, y, btnWidth, btnHeight);
     
-    // change text color to dark brown and setup style
-    fill(100, 60, 10);
-    text("Continue->", x+5, y+10, btnWidth, btnHeight);
+    // button text
+    showText(x+5, y+7, btnWidth, btnHeight, "Continue");
   }
   
   
@@ -151,9 +148,9 @@ class Instructions{
   void handleMouseEvents(){
      if(doContinue()){ // continue button
         model.nextAct();
-      } else if(game.givenBtnIsSelected(722, height/5 + shift-15)) {
+      } else if(game.givenBtnIsSelected(downX, upY)) {
         game.increaseDifficulty();
-      } else if (game.givenBtnIsSelected(722, game.guessBoxSize + height/5 + shift + 5)) {
+      } else if (game.givenBtnIsSelected(downX, downY)) {
         game.decreaseDifficulty();
       }
   }

@@ -75,6 +75,11 @@ class World{
         fill(255);
         text("You are great pilot", 20, 20);
         break;
+      case 9: // shame ending
+        background(0);
+        fill(255);
+        text("You did not help him. Shame on you.", 20, 20);
+        break;
     }
   }
 

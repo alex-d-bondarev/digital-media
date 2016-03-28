@@ -11,6 +11,8 @@ color grass = color(70,  100, 40);
 color orange = color(245,170,0);
 color red = color(210,50,50);
 color road = color(200, 165, 130);
+color textBackground = color(250, 230, 194);
+color textColor = color(100, 60, 10);
 color UFOStroke = color(55,240,240);
 
 //--------------------------------------------------------------------------------
