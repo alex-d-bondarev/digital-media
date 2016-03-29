@@ -95,6 +95,7 @@ class World{
       landar.handleKeyPressed();
     } else if (currentAct == 8) {
       currentAct = 6;
+      sound.stop();
     }
   } 
   
@@ -126,9 +127,11 @@ class World{
       case 8:
       case 9:
         currentAct = 1;
+        sound.stop();
         break;
       case 10:
         currentAct = 6;
+        sound.stop();
         break;
       default:
         info.handleMouseEvents();
