@@ -46,8 +46,7 @@ class Collect{
     
     transparentBackground();
     endAct();
-    displayEnergy();    
-    //ufo.collect();
+    displayEnergy();   
     ufo.display();
     intersect();
     fallMeteors();    
@@ -128,7 +127,6 @@ class Collect{
     if (millis() - gameStartTime > startPeriod) { startMeteors(); }
     for(int i = 0; i < drops.length; i++) {
         drops[i].fall();
-        println(drops[i].x + "-" + drops[i].y);
     }   
   }
   

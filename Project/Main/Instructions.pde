@@ -164,7 +164,7 @@ class Instructions{
       gameResult = "It a pity, but you made a wrong combination. Seems that an alien will have to try to combine rocks on his own.";
       sound.play("lost");
     }
-    String finalText = "To start from the start screen - please press mouse button. To start logic game again - please press any keyboard button.";
+    String finalText = "To start logic game again - please press mouse button. To exit game - please press any keyboard button.";
     
     // show text
     showText(100, 100, 800, 400, gameResult);

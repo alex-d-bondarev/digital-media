@@ -10,7 +10,7 @@ class LogicGame {
   int maxTries = 7;
   int numOfVariants = 3;
 
-  int[] correctHistory = new int[maxTries];
+  int[] correctHistory;
   int[] correctVariant;
 
   String[][] allVariants = {  {"11.jpg", "12.jpg", "13.jpg", "14.jpg"}, 
@@ -68,6 +68,7 @@ class LogicGame {
   // EFFECT: reset game
   //--------------------------------------------------------------------------------
   void reset(World world, Instructions inf) {
+    correctHistory = new int[maxTries];
     currentTry = 0;
     generateRandomCorrectVariant();
     guessToZero();
@@ -303,7 +304,7 @@ class LogicGame {
       //----------------------------------------
       // up btn
       // reduce only if current guess > 0
-      if (givenBtnIsSelected(firstLineX+5+(shift*i), firstLineY+(shift*currentTry))) {
+      if (givenBtnIsSelected(firstLineX+15+(shift*i), firstLineY+(shift*currentTry))) {
         if (guess[i] > 0) { 
           guess[i]--;
           sound.play("change");
@@ -313,7 +314,7 @@ class LogicGame {
       //----------------------------------------
       // down btn
       // increase only if current guess < 4
-      if (givenBtnIsSelected(firstLineX+5+(shift*i), firstLineY + guessBoxSize + 20 +(shift*currentTry))) {
+      if (givenBtnIsSelected(firstLineX+15+(shift*i), firstLineY + guessBoxSize + 20 +(shift*currentTry))) {
         if (guess[i] < numOfVariants) { 
           guess[i]++;
           sound.play("change");

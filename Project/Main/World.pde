@@ -19,7 +19,15 @@ class World{
   //================================================================================
   World(int act) {
     currentAct = act;
-    
+    reset();
+  }
+  
+  
+  //================================================================================
+  // methods
+  //================================================================================
+  
+  void reset() {
     // initialize objects
     sound = new Sound();
     aln = new Alien(this, sound);
@@ -33,11 +41,6 @@ class World{
     
     ufo.reset();
   }
-  
-  
-  //================================================================================
-  // methods
-  //================================================================================
   
   //--------------------------------------------------------------------------------
   // EFFECT: displays data according to current act
@@ -95,7 +98,7 @@ class World{
       landar.handleKeyPressed();
     } else if (currentAct == 8) {
       sound.stop();
-      currentAct = 1;
+      exit();
     }
   } 
   
@@ -137,6 +140,7 @@ class World{
       case 9:
         currentAct = 1;
         sound.stop();
+        reset();
         break;
       case 10:
         currentAct = 6;
