@@ -35,6 +35,7 @@ class LogicGame {
   String resultText;
 
   PImage icon;
+  Sound sound;
 
   //----------------------------------------
   // Other
@@ -45,7 +46,7 @@ class LogicGame {
   //================================================================================
   // constructor
   //================================================================================
-  LogicGame() {
+  LogicGame(Sound music) {
     buttonWidth = 25;
     buttonHeight = 10;
     confirmButtonX = 680;
@@ -55,6 +56,7 @@ class LogicGame {
     shift = 70;
     firstLine = "Guesses                                                  Results";
     radius = 15;
+    sound = music;
   }
 
 
@@ -304,6 +306,7 @@ class LogicGame {
       if (givenBtnIsSelected(firstLineX+5+(shift*i), firstLineY+(shift*currentTry))) {
         if (guess[i] > 0) { 
           guess[i]--;
+          sound.play("change");
         }
       }
 
@@ -313,6 +316,7 @@ class LogicGame {
       if (givenBtnIsSelected(firstLineX+5+(shift*i), firstLineY + guessBoxSize + 20 +(shift*currentTry))) {
         if (guess[i] < numOfVariants) { 
           guess[i]++;
+          sound.play("change");
         }
       }
     }
@@ -324,6 +328,7 @@ class LogicGame {
   //--------------------------------------------------------------------------------
   void confirmGuess() {
     if (confirmIsSelected(confirmButtonX, firstLineY+15+(shift*currentTry))) {
+      sound.play("confirm");
       if (currentTry < maxTries) {
         // save result in guess history
         for (int i = 0; i < guess.length; i++) {
@@ -402,12 +407,14 @@ class LogicGame {
   void increaseDifficulty() {
     if (guess.length < 4) {
       guess = append(guess, 0);
+      sound.play("change");
     }
   }
   //----------------------------------------
   void decreaseDifficulty() {
     if (guess.length > 1) {
       guess = shorten(guess);
+      sound.play("change");
     }
   }
 }

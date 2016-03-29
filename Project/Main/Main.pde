@@ -40,7 +40,7 @@ int rightHillTop = pointX+230;
 //--------------------------------------------------------------------------------
 // Other global variables
 //--------------------------------------------------------------------------------
-int firstAct = 1; 
+int firstAct = 6; 
 int[] guess = {0, 0, 0};
 Minim minim;
 World world;
