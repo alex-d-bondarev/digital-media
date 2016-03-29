@@ -163,7 +163,7 @@ class Ufo{
   
     // if not paused
     // calculate GRAVITY force on UFO and move
-    if(!paused) { moveUFO(); }
+    if(!paused && !landed) { moveUFO(); }
     
     //----------------------------------------
     // draw torque (red and orange fire)
@@ -190,12 +190,12 @@ class Ufo{
     }
     
     //----------------------------------------
-    strokeWeight(1);
-    popMatrix();
-    
-    //----------------------------------------
     // check if UFO landed
     setLandingStatus();
+    
+    //----------------------------------------
+    strokeWeight(1);
+    popMatrix();
   }
   
   
@@ -267,34 +267,41 @@ class Ufo{
         aln.setX(posX);
         aln.setY(posY-25);
         aln.nextState();
+        sound.play("landing");
         
       //----------------------------------------  
       // for landing on right part of big hill
       } else if(posX > rightHillTop && posY > handHeight) {
         message = "Go left";
+        sound.play("failLanding");
       
       // for landing on left part of big hill
       } else if(posX < leftHillTop && posX > leftHillBottom && posY > extremeHeight) {
         message = "Go right";
+        sound.play("failLanding");
       
       // for river landing
        } else if(posX > rightHandEdge+70 && posX < leftHillBottom && posY > extremeHeight) {
         message = "No water!!";
+        sound.play("failLanding");
         
       // for hand landing 
        } else if(posX > rightHeadEdge && posX < rightHandEdge 
                                       && posY > handHeight && posY < handHeight+30) {
         message = "Impossible!";
+        sound.play("failLanding");
       
       // for head landing
        } else if(posX > leftHeadEdge && posX < rightHeadEdge 
                                      && posY > headHeight && posY < headHeight+20) {
         message = "???";
+        sound.play("failLanding");
       
       // for far hills landing
       } else if (posY > extremeHeight) {
       // landOnFarHills = true;
         message = "Too far";
+        sound.play("failLanding");
       
       // still flying
       } else {
@@ -314,7 +321,6 @@ class Ufo{
       
       // start showing a small alien for nice landing
       if (niceLanding) {
-      
       //----------------------------------------  
       // show dialog for wrong landing
       } else {
@@ -327,14 +333,14 @@ class Ufo{
         fill(white);
         
         // draw dialog cloud
-        ellipse(10,-10,90,50);
+        ellipse(10,-10,130,60);
         beginShape();
         vertex(-35,-10);
         bezierVertex(-35,-10, -35,15, 0,25);
         endShape();
         
         fill(black);
-        text(message, 10,-10);
+        text(message, 10,0);
         
         popMatrix();
         
@@ -377,10 +383,11 @@ class Ufo{
   // EFFECT: Handle arrow keys (reliesed)
   //--------------------------------------------------------------------------------
   void handleKeyReleased(){
-   moveRight = false;
-   moveLeft = false;
-   moveUp = false;
-   moveDown = false;
+    sound.stop();
+    moveRight = false;
+    moveLeft = false;
+    moveUp = false;
+    moveDown = false;
   } 
   
 

@@ -30,6 +30,7 @@ class Sound{
     changeBtn = path + changeBtn + type;
     click = path + click + type;
     confirmBtn = path + confirmBtn + type;
+    failLanding = path + failLanding + type;
     flyBtn = path + flyBtn + type;
     flyM = path + flyM + type;
     intro = path + intro + type;
@@ -52,8 +53,8 @@ class Sound{
       switchSong(name);
       song.rewind();
       song.play();
-    }
-    if (name.equals("meteor") || name.equals("mouse")){
+    } else if (name.equals("meteor") || name.equals("mouse") ||
+               name.equals("landing") || name.equals("failLanding")){
       stop();
       switchSong(name);
       song.rewind();
@@ -81,9 +82,6 @@ class Sound{
         case "btn":
           song = minim.loadFile(flyBtn);
           break;
-        case "failLanding":
-          song = minim.loadFile(failLanding);
-          break;
         case "mouse":
           song = minim.loadFile(flyM);
           break;
@@ -92,6 +90,9 @@ class Sound{
           break;
         case "landing":
           song = minim.loadFile(landing);
+          break;
+        case "failLanding":
+          song = minim.loadFile(failLanding);
           break;
         case "meteor":
           song = minim.loadFile(meteor);
