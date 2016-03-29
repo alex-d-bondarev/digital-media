@@ -6,12 +6,14 @@ class Collect{
   int numDrops = 0;
   Meteor[] drops = new Meteor[10];
   World world;
+  Sound sound;
   Ufo ufo;
   
   
-  Collect(World model, Ufo inUfo) {
+  Collect(World model, Ufo inUfo, Sound music) {
     world = model;
     ufo = inUfo;
+    sound = music;
     size(1000, 600);
     background(space);
     smooth();
@@ -101,6 +103,7 @@ class Collect{
             break;
         }
         drops[i].collect();
+        sound.play("meteor");
       }
     }
   }

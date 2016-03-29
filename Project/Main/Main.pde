@@ -40,8 +40,9 @@ int rightHillTop = pointX+230;
 //--------------------------------------------------------------------------------
 // Other global variables
 //--------------------------------------------------------------------------------
-int firstAct = 10; 
+int firstAct = 1; 
 int[] guess = {0, 0, 0};
+Minim minim;
 World world;
 
 
@@ -52,6 +53,8 @@ void setup(){
   //window
   size(1000,600);
   background(255);
+  
+  minim = new Minim(this);
   
   // init WorldModel
   world = new World(firstAct);

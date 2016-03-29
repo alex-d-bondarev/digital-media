@@ -5,7 +5,9 @@ class Sound{
   
   // sound names
   String changeBtn = "changeBtn";
+  String click = "click";
   String confirmBtn = "confirmBtn";
+  String failLanding = "failLanding";
   String flyBtn = "flyBtn";
   String flyM = "flyM";
   String intro = "intro";
@@ -17,7 +19,6 @@ class Sound{
   
   // Other
   AudioPlayer song;
-  Minim minim;
   String path = "sound/";
   String type = ".mp3";
   
@@ -27,6 +28,7 @@ class Sound{
   //================================================================================
   Sound() {
     changeBtn = path + changeBtn + type;
+    click = path + click + type;
     confirmBtn = path + confirmBtn + type;
     flyBtn = path + flyBtn + type;
     flyM = path + flyM + type;
@@ -37,7 +39,6 @@ class Sound{
     sad = path + sad + type;
     win = path + win + type;
     
-    minim = new Minim(this);
     
     song = minim.loadFile(intro);
   }
@@ -48,6 +49,12 @@ class Sound{
   //================================================================================
   void play(String name) {
     if(!song.isPlaying()) {
+      switchSong(name);
+      song.rewind();
+      song.play();
+    }
+    if (name.equals("meteor") || name.equals("mouse")){
+      stop();
       switchSong(name);
       song.rewind();
       song.play();
@@ -65,11 +72,17 @@ class Sound{
         case "change":
           song = minim.loadFile(changeBtn);
           break;
+        case "click":
+          song = minim.loadFile(click);
+          break;
         case "confirm":
           song = minim.loadFile(confirmBtn);
           break;
         case "btn":
           song = minim.loadFile(flyBtn);
+          break;
+        case "failLanding":
+          song = minim.loadFile(failLanding);
           break;
         case "mouse":
           song = minim.loadFile(flyM);

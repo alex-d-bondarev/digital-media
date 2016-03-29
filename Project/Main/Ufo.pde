@@ -29,15 +29,17 @@ class Ufo{
   
   Alien aln;
   Landing landar;
+  Sound sound;
   World world;
   
   //================================================================================
   // constructor
   //================================================================================
-  Ufo(World model, Alien alien, Landing area) {
+  Ufo(World model, Alien alien, Landing area, Sound music) {
     world = model;
     aln = alien;
     landar = area;
+    sound = music;
     ufoMainColor = color(50,106,70);
     GRAVITY = 0.015;
     TORQUE = 0.05;
@@ -202,10 +204,22 @@ class Ufo{
   //--------------------------------------------------------------------------------
   void moveUFO(){
     // update by controls
-    if(moveRight){ horizontalSpeed+=TORQUE; } 
-    if(moveLeft) { horizontalSpeed-=TORQUE; } 
-    if(moveUp) {   verticalSpeed-=TORQUE;   }
-    if(moveDown){  verticalSpeed+= TORQUE;  }
+    if(moveRight){ 
+      horizontalSpeed+=TORQUE;
+      sound.play("btn");
+    } 
+    if(moveLeft) { 
+      horizontalSpeed-=TORQUE; 
+      sound.play("btn");
+    } 
+    if(moveUp) {   
+        verticalSpeed-=TORQUE;   
+      sound.play("btn");
+    }
+    if(moveDown){  
+      verticalSpeed+= TORQUE;  
+      sound.play("btn");
+    }
     
     //----------------------------------------
     // update by gravity
@@ -376,7 +390,7 @@ class Ufo{
   //         wind angle depends on mouse position
   //--------------------------------------------------------------------------------
   void handleMousePressed() {
-    
+    sound.play("mouse");
     // calculate whole distance from UFO to mouse
     // by using Pythagorean theorem
     distance = sqrt( pow(mouseX - posX, 2) 

@@ -10,6 +10,7 @@ class World{
   Background bkg;
   Foreground frg;
   Landing landar;
+  Sound sound;
   Ufo ufo;
   Collect collectGame;  
   
@@ -20,14 +21,15 @@ class World{
     currentAct = act;
     
     // initialize objects
+    sound = new Sound();
     aln = new Alien(this);
     bkg = new Background();
     frg = new Foreground();
     game = new LogicGame();
-    info = new Instructions(game, this);
+    info = new Instructions(game, this, sound);
     landar = new Landing(red, UFOStroke);
-    ufo = new Ufo(this, aln, landar);
-    collectGame = new Collect(this, ufo);
+    ufo = new Ufo(this, aln, landar, sound);
+    collectGame = new Collect(this, ufo, sound);
     
     ufo.reset();
   }

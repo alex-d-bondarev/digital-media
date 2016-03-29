@@ -50,6 +50,7 @@ class Instructions{
   // text font = Kokonor-24
   PFont f;
   PImage picture;
+  Sound sound;
   
   // variables for classes
   LogicGame game;
@@ -58,9 +59,10 @@ class Instructions{
   //================================================================================
   // constructor
   //================================================================================
-  Instructions(LogicGame g, World world) {
+  Instructions(LogicGame g, World world, Sound music) {
     game = g;
     model = world;
+    sound = music;
     
     // more coordinates
     downY = upY + 20 + game.guessBoxSize;
@@ -83,6 +85,7 @@ class Instructions{
     picture = loadImage("pics/Title.png");
     image(picture, 250, 112, 500, 375);
     showText(350, 255, 290, 150, title);
+    sound.play("intro");
   }
   
   
@@ -275,7 +278,9 @@ class Instructions{
         act5MouseEvents();
       } else {
         background(white);
-         model.nextAct();
+        sound.stop();
+        sound.play("click");
+        model.nextAct();
       }
   }
   
