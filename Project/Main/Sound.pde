@@ -3,7 +3,7 @@ class Sound{
   // properties
   //================================================================================
   
-  // sound names
+  // sound file names
   String changeBtn = "changeBtn";
   String click = "click";
   String confirmBtn = "confirmBtn";
@@ -29,6 +29,7 @@ class Sound{
   // constructor
   //================================================================================
   Sound() {
+    // combine file path, file name and file type for all files
     changeBtn = path + changeBtn + type;
     click = path + click + type;
     confirmBtn = path + confirmBtn + type;
@@ -44,18 +45,26 @@ class Sound{
     walking = path + walking + type;
     win = path + win + type;
     
-    
+    // loa default music
     song = minim.loadFile(intro);
   }  
   
   //================================================================================
   // methods
   //================================================================================
+  
+  //--------------------------------------------------------------------------------
+  // Effect: play selected sound. Some sounds will be played only after others finish
+  //         other sounds will play, as soon as needed
+  //--------------------------------------------------------------------------------
   void play(String name) {
+    // wait for current sound to finish
     if(!song.isPlaying()) {
       switchSong(name);
       song.rewind();
       song.play();
+      
+      // do not wait and play ASAP
     } else if (name.equals("meteor") || name.equals("mouse") ||
                name.equals("landing") || name.equals("failLanding") ||
                name.equals("change")){
@@ -66,12 +75,19 @@ class Sound{
     }
   }
   
+  //--------------------------------------------------------------------------------
+  // Effect: stop playing current sound
+  //--------------------------------------------------------------------------------
   void stop(){
     if(song.isPlaying()) {
       song.pause();
     }
   }
   
+  //--------------------------------------------------------------------------------
+  // Given: song name
+  // Effect: switch current song to given one
+  //--------------------------------------------------------------------------------
   void switchSong(String name){
     switch(name) {
         case "change":
@@ -116,6 +132,6 @@ class Sound{
         case "lost":
           song = minim.loadFile(lost);
           break;
-      }
+    }
   }
 }

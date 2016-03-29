@@ -343,6 +343,7 @@ class LogicGame {
     }
   }
 
+
   //--------------------------------------------------------------------------------
   // EFFECT: should be impossible to win first try 
   //         confirm guess values. If all are guessed - win 

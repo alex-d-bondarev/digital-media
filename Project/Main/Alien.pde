@@ -173,6 +173,7 @@ class Alien{
   // GIVEN: current and target coordinates
   // EFFECT: makes 1 step towards given coordinates. Step is taken 
   //         according to aliens' velocity
+  // Return: new coordinate
   //--------------------------------------------------------------------------------
   float moveToCoordinate(float cur, float trgt) {
     sound.play("walking");

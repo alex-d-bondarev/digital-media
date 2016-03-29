@@ -2,6 +2,7 @@ class Instructions{
   //================================================================================
   // properties
   //================================================================================  
+  // main coordinates
   int btnHeight = 40;
   int btnWidth = 100;
   int continueX = 800;
@@ -11,11 +12,13 @@ class Instructions{
   int textHeight = 50;
   int textLeftEdge = 50;
   
+  //----------------------------------------
   // difficulty buttons' coordinates
   int downX = 722;
   int downY;
   int upY = 430;
   
+  //----------------------------------------
   // act 1 title
   String title = "Alien & Kozak";
   
@@ -47,13 +50,14 @@ class Instructions{
   int act10Width = 370;
   int act10Height = 120;
   
+  //----------------------------------------
   // text font = Kokonor-24
   PFont f;
-  PImage picture;
-  Sound sound;
   
   // variables for classes
+  PImage picture;
   LogicGame game;
+  Sound sound;
   World model;
   
   //================================================================================
