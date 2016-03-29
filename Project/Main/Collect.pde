@@ -8,6 +8,7 @@ class Collect{
   World world;
   Ufo ufo;
   
+  
   Collect(World model, Ufo inUfo) {
     world = model;
     ufo = inUfo;
@@ -21,6 +22,7 @@ class Collect{
     startMeteors();
     gameStartTime = millis();
   }
+  
   
   void display() {
     energy = ufo.energy;
@@ -36,17 +38,18 @@ class Collect{
   
   void transparentBackground() {
     fill(50, 50, 100, 30);
-    rect(0, 0, 1000, 600);
+    rect(0, 0, width, height);
   }
   
   
   void endAct() {
+    textSize(15);
     if (energy == 0) {
       world.nextAct(); 
       ufo.reset();
     } else if (millis() - gameStartTime > gameTime) { 
       if(energy > 0){
-        world.currentAct = 8;
+        world.currentAct = 9;
         ufo.reset();
       } else {
         world.nextAct(); 

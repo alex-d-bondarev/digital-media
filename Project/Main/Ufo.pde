@@ -71,7 +71,7 @@ class Ufo{
   void reset() {
     aln.reset();
     landar.hide();
-    if(world.currentAct == 1 || world.currentAct == 2){
+    if(world.currentAct == 1 || world.currentAct == 3){
       posY = 300;
       posX = 500;
     } else { 
@@ -209,7 +209,7 @@ class Ufo{
     
     //----------------------------------------
     // update by gravity
-    if(world.currentAct == 4){
+    if(world.currentAct == 5){
       verticalSpeed += GRAVITY;
       // update by windage
       if(horizontalSpeed > 0){
@@ -228,7 +228,7 @@ class Ufo{
     // out of the screen
     if(posX < -30) { posX = 1030; }
     if(posX > 1030){ posX = -30; } 
-    if(world.currentAct == 2){
+    if(world.currentAct == 3){
       if (posY < -30) { posY = 630; }
       else if (posY > 630) { posY = -30; }
     } else if(posY < 0) { verticalSpeed = 0; }

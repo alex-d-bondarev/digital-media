@@ -14,10 +14,10 @@ class LogicGame {
   int[] correctVariant;
 
   String[][] allVariants = {  {"11.jpg", "12.jpg", "13.jpg", "14.jpg"}, 
-    {"21.jpg", "22.jpg", "23.jpg", "24.jpg"}, 
-    {"31.jpg", "32.jpg", "33.jpg", "34.jpg"}, 
-    {"41.jpg", "42.jpg", "43.jpg", "44.jpg"}
-  };
+                              {"21.jpg", "22.jpg", "23.jpg", "24.jpg"}, 
+                              {"31.jpg", "32.jpg", "33.jpg", "34.jpg"}, 
+                              {"41.jpg", "42.jpg", "43.jpg", "44.jpg"}
+                            };
   int[][] guessHistory;
 
   //----------------------------------------

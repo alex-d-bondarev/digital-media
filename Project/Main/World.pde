@@ -44,15 +44,18 @@ class World{
   void display() {
     switch(currentAct){
       case 1: //introduction
-        nextAct();
+        info.displayStart();
         break;
-      case 2: // catch meteors
+      case 2: // ufo in space introduction
+        info.spaceInfo();
+        break;
+      case 3: // catch meteors
         collectGame.display();
         break;
-      case 3: // landing information
-        nextAct();
+      case 4: // landing information
+        info.landing();
         break;
-      case 4: // landing
+      case 5: // landing
         bkg.display();
         aln.display();
         landar.display();
@@ -61,21 +64,21 @@ class World{
         frg.display();
         aln.displayCloser();
         break;
-      case 5: 
+      case 6: 
         info.displayGuessInstructions();
         break;
-      case 6:
+      case 7:
         game.play();
         break;
-      case 7: // regular ending
+      case 8: // regular ending
         projectStub(); 
         break;
-      case 8: // great pilot ending
+      case 9: // great pilot ending
         background(0);
         fill(255);
         text("You are great pilot", 20, 20);
         break;
-      case 9: // shame ending
+      case 10: // shame ending
         background(0);
         fill(255);
         text("You did not help him. Shame on you.", 20, 20);
@@ -88,11 +91,10 @@ class World{
   // EFFECT: Handle arrow keys (pressed)
   //--------------------------------------------------------------------------------
   void handleKeyPressed(){
-    if (currentAct == 2 || currentAct == 4) {
+    if (currentAct == 3) {
       ufo.handleKeyPressed();
-      landar.handleKeyPressed();
-    }
-    if (currentAct == 2 || currentAct == 4) {
+    } else if (currentAct == 5) {
+      ufo.handleKeyPressed();
       landar.handleKeyPressed();
     }
   } 
@@ -102,7 +104,7 @@ class World{
   // EFFECT: Handle arrow keys (reliesed)
   //--------------------------------------------------------------------------------
   void handleKeyReleased(){
-    if (currentAct == 2 || currentAct == 4) {
+    if (currentAct == 3 || currentAct == 5) {
       ufo.handleKeyReleased();
     }
   } 
@@ -113,19 +115,21 @@ class World{
   //--------------------------------------------------------------------------------
   void handleMouseEvents() {
     switch(currentAct){
+      case 1:
       case 2:
-        ufo.handleMousePressed();
+      case 6:
+        info.handleMouseEvents();
         break;
-      case 4:
+      case 3:
         ufo.handleMousePressed();
         break;
       case 5:
-        info.handleMouseEvents();
-        break;
-      case 6:
-        game.handleMouseEvents();
+        ufo.handleMousePressed();
         break;
       case 7:
+        game.handleMouseEvents();
+        break;
+      case 8:
         currentAct = 5; // TODO: this is temp stub
         break;
     }
@@ -136,7 +140,7 @@ class World{
   // EFFECT: go to the next act
   //--------------------------------------------------------------------------------
   void nextAct() {
-    if(currentAct == 5) {
+    if(currentAct == 6) {
       game.reset(this);
     }
     currentAct++;
