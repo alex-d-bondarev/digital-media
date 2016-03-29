@@ -183,6 +183,7 @@ class Instructions{
     fill(black);
     rect(act9X, act9Y, act9Width, act9Height);
     fill(white);
+    textSize(24);
     text(act9, act9X, act9Y, act9Width, act9Height);
     sound.play("pilot");
   }
@@ -228,6 +229,7 @@ class Instructions{
     // change text color to dark brown and setup style
     fill(textColor);
     rectMode(CORNER);
+    textAlign(LEFT);
     
     if(world.currentAct == 1) {
       textSize(46);

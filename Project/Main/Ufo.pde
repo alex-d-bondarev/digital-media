@@ -60,7 +60,6 @@ class Ufo{
     paused = false;
     niceLanding = false;
     ufoRange = 45;
-    energy = 17;
   }
   
   //================================================================================
@@ -73,7 +72,7 @@ class Ufo{
   void reset() {
     aln.reset();
     landar.hide();
-    if(world.currentAct == 1 || world.currentAct == 3){
+    if(world.currentAct == 1 || world.currentAct == 2 || world.currentAct == 3){
       posY = 300;
       posX = 500;
     } else { 
@@ -89,6 +88,7 @@ class Ufo{
     landed = false;
     paused = false;
     niceLanding = false;
+    energy = 17;
   }
   
   

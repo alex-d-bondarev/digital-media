@@ -115,6 +115,11 @@ class World{
   //--------------------------------------------------------------------------------
   void handleMouseEvents() {
     switch(currentAct){
+      case 1:
+        info.handleMouseEvents();
+        collectGame.reset();
+        ufo.reset();
+        break;      
       case 3:
         ufo.handleMousePressed();
         break;

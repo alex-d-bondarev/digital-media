@@ -1,10 +1,10 @@
 class Collect{
   long gameTime = 22000;
   long gameStartTime = 0;
-  long startPeriod = 500;
+  long startPeriod;
   int energy;
-  int numDrops = 0;
-  Meteor[] drops = new Meteor[10];
+  int numDrops;
+  Meteor[] drops;
   World world;
   Sound sound;
   Ufo ufo;
@@ -14,17 +14,25 @@ class Collect{
     world = model;
     ufo = inUfo;
     sound = music;
+    reset();
     size(1000, 600);
     background(space);
     smooth();
     noStroke();
+    startMeteors();
+  }
+  
+  
+  void reset(){
+    gameStartTime = millis();
+    startPeriod = 500;
+    drops = new Meteor[10];
+    numDrops = 0;
+    ufo.reset();
     for(int i = 0; i < drops.length; i++) {
       drops[i] = new Meteor();
     }
-    startMeteors();
-    gameStartTime = millis();
   }
-  
   
   void display() {
     energy = ufo.energy;
@@ -52,7 +60,6 @@ class Collect{
     } else if (millis() - gameStartTime > gameTime) { 
       if(energy > 0){
         world.currentAct = 9;
-        ufo.reset();
       } else {
         world.nextAct(); 
         ufo.reset();
@@ -113,6 +120,7 @@ class Collect{
     if (millis() - gameStartTime > startPeriod) { startMeteors(); }
     for(int i = 0; i < drops.length; i++) {
         drops[i].fall();
+        println(drops[i].x + "-" + drops[i].y);
     }   
   }
   
