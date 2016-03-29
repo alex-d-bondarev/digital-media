@@ -6,7 +6,7 @@ class Instructions{
   int btnWidth = 100;
   int continueX = 800;
   int continueY = 520;
-  int noX = 325;
+  int noX = 555;
   int noY = 25;
   int textHeight = 50;
   int textLeftEdge = 50;
@@ -178,11 +178,13 @@ class Instructions{
   //--------------------------------------------------------------------------------
   void secretPilot() {
     picture = loadImage("pics/pilot.jpg");
+    noStroke();
     image(picture, 0, 0, width, height);
     fill(black);
     rect(act9X, act9Y, act9Width, act9Height);
     fill(white);
     text(act9, act9X, act9Y, act9Width, act9Height);
+    sound.play("pilot");
   }
   
   
@@ -190,13 +192,14 @@ class Instructions{
   // EFFECT: act#10 - secret ending #2 (shame)
   //--------------------------------------------------------------------------------
   void secretShame() {
-    background(space);
+    noStroke();
     picture = loadImage("pics/sad.jpg");
     image(picture, 0, 0, width, height);
     fill(black);
     rect(act10X, act10Y, act10Width, act10Height);
     fill(white);
     text(act10, act10X, act10Y, act10Width, act10Height);
+    sound.play("sad");
   }
   
   
