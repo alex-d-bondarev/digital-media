@@ -22,10 +22,10 @@ class World{
     
     // initialize objects
     sound = new Sound();
-    aln = new Alien(this, sound);
+    aln = new Alien(this);
     bkg = new Background();
     frg = new Foreground();
-    game = new LogicGame(sound);
+    game = new LogicGame();
     info = new Instructions(game, this, sound);
     landar = new Landing(red, UFOStroke);
     ufo = new Ufo(this, aln, landar, sound);

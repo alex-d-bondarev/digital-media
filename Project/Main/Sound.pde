@@ -12,11 +12,9 @@ class Sound{
   String flyM = "flyM";
   String intro = "intro";
   String landing = "landing";
-  String lost = "lost";
   String meteor = "meteor";
   String pilot = "pilot";
   String sad = "sad";
-  String walking = "walking";
   String win = "win";
   
   // Other
@@ -37,11 +35,9 @@ class Sound{
     flyM = path + flyM + type;
     intro = path + intro + type;
     landing = path + landing + type;
-    lost = path + lost + type;
     meteor = path + meteor + type;
     pilot = path + pilot + type;
     sad = path + sad + type;
-    walking = path + walking + type;
     win = path + win + type;
     
     
@@ -58,8 +54,7 @@ class Sound{
       song.rewind();
       song.play();
     } else if (name.equals("meteor") || name.equals("mouse") ||
-               name.equals("landing") || name.equals("failLanding") ||
-               name.equals("change")){
+               name.equals("landing") || name.equals("failLanding")){
       stop();
       switchSong(name);
       song.rewind();
@@ -108,14 +103,8 @@ class Sound{
         case "sad":
           song = minim.loadFile(sad);
           break;
-        case "walking":
-          song = minim.loadFile(walking);
-          break;
         case "win":
           song = minim.loadFile(win);
-          break;
-        case "lost":
-          song = minim.loadFile(lost);
           break;
       }
   }

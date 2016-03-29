@@ -160,10 +160,8 @@ class Instructions{
     String gameResult;
     if(game.won){
       gameResult = "Congratulations! You have won the game! Alien seems to be happy because he has enough energy to fly home. He thanks you and flies away. Gosh, what a day!";
-      sound.play("win");
     } else {
       gameResult = "It a pity, but you made a wrong combination. Seems that an alien will have to try to combine rocks on his own.";
-      sound.play("lost");
     }
     String finalText = "To start from the start screen - please press mouse button. To start logic game again - please press any keyboard button.";
     
@@ -183,7 +181,6 @@ class Instructions{
     rect(act9X, act9Y, act9Width, act9Height);
     fill(white);
     text(act9, act9X, act9Y, act9Width, act9Height);
-    sound.play(pilot");
   }
   
   
@@ -198,7 +195,6 @@ class Instructions{
     rect(act10X, act10Y, act10Width, act10Height);
     fill(white);
     text(act10, act10X, act10Y, act10Width, act10Height);
-    sound.play("sad");
   }
   
   
@@ -294,7 +290,6 @@ class Instructions{
   //--------------------------------------------------------------------------------
   void act5MouseEvents(){
      if(inButton(continueX, continueY)){ // continue button
-        sound.play("click");
         model.nextAct();
       } else if(inButton(noX, noY)) {
         model.currentAct = 10;
