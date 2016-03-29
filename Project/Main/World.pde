@@ -94,8 +94,8 @@ class World{
       ufo.handleKeyPressed();
       landar.handleKeyPressed();
     } else if (currentAct == 8) {
-      currentAct = 6;
       sound.stop();
+      currentAct = 1;
     }
   } 
   
@@ -130,6 +130,10 @@ class World{
         game.handleMouseEvents();
         break;
       case 8:
+        currentAct = 6;
+        game.reset(this,info);
+        sound.stop();
+        break;
       case 9:
         currentAct = 1;
         sound.stop();
