@@ -25,7 +25,7 @@ class World{
     aln = new Alien(this, sound);
     bkg = new Background();
     frg = new Foreground();
-    game = new LogicGame();
+    game = new LogicGame(sound);
     info = new Instructions(game, this, sound);
     landar = new Landing(red, UFOStroke);
     ufo = new Ufo(this, aln, landar, sound);
