@@ -30,6 +30,10 @@ class Collect{
   //================================================================================
   // methods
   //================================================================================
+  
+  //--------------------------------------------------------------------------------
+  // Effect: reset critical variables to initial point 
+  //--------------------------------------------------------------------------------
   void reset(){
     gameStartTime = millis();
     startPeriod = 500;
@@ -41,6 +45,10 @@ class Collect{
     }
   }
   
+  
+  //--------------------------------------------------------------------------------
+  // Effect: display all data that is needed for this game
+  //--------------------------------------------------------------------------------
   void display() {
     energy = ufo.energy;
     
@@ -53,12 +61,18 @@ class Collect{
   }
   
   
+  //--------------------------------------------------------------------------------
+  // Effect: makes visible "tails" for moving objects
+  //--------------------------------------------------------------------------------
   void transparentBackground() {
     fill(space, 30);
     rect(0, 0, width, height);
   }
   
   
+  //--------------------------------------------------------------------------------
+  // Effect: analyze game status and check if game is over
+  //--------------------------------------------------------------------------------
   void endAct() {
     textSize(15);
     if (energy <= 0) {
@@ -75,6 +89,9 @@ class Collect{
   }
   
   
+  //--------------------------------------------------------------------------------
+  // Effect: show energy bar in top left corner of the screen
+  //--------------------------------------------------------------------------------
   void displayEnergy(){
     // empty rectangle
     noFill();
@@ -90,6 +107,11 @@ class Collect{
   }
   
   
+  //--------------------------------------------------------------------------------
+  // Effect: analyze position of UFO and all meteors. 
+  //         if UFO intersects with one of the meteors -> meteor changes position
+  //                                                      UFO's energy is updated
+  //--------------------------------------------------------------------------------
   void intersect(){
     float x1 = ufo.posX;
     float y1 = ufo.posY;
@@ -123,6 +145,10 @@ class Collect{
   }
   
   
+  //--------------------------------------------------------------------------------
+  // Effect: launch meteors one by one every "startPeriod" milliseconds
+  //         update meteors position
+  //--------------------------------------------------------------------------------
   void fallMeteors() {
     if (millis() - gameStartTime > startPeriod) { startMeteors(); }
     for(int i = 0; i < drops.length; i++) {
@@ -131,6 +157,11 @@ class Collect{
   }
   
   
+  //--------------------------------------------------------------------------------
+  // Effect: launch next meteor, until all are launched
+  //         update time period
+  //         update UFO's energy
+  //--------------------------------------------------------------------------------
   void startMeteors() {
     if (numDrops < drops.length) {
       drops[numDrops].start();
