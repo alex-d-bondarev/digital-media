@@ -38,6 +38,7 @@ class LogicGame {
 
   //----------------------------------------
   // Other
+  Instructions info;
   World model;
 
 
@@ -48,11 +49,11 @@ class LogicGame {
     buttonWidth = 25;
     buttonHeight = 10;
     confirmButtonX = 680;
-    firstLineY = 135;
-    firstLineX = 220;
-    guessBoxSize = 30;
-    shift = 55;
-    firstLine = "Guesses                                                                         Results";
+    firstLineY = 80;
+    firstLineX = 150;
+    guessBoxSize = 50;
+    shift = 70;
+    firstLine = "Guesses                                                  Results";
     radius = 15;
   }
 
@@ -62,25 +63,25 @@ class LogicGame {
   //================================================================================
 
   //--------------------------------------------------------------------------------
+  // EFFECT: reset game
+  //--------------------------------------------------------------------------------
+  void reset(World world, Instructions inf) {
+    currentTry = 0;
+    generateRandomCorrectVariant();
+    guessToZero();
+    info = inf;
+    model = world;
+    setHistory();
+  }
+
+
+  //--------------------------------------------------------------------------------
   // EFFECT: play logic game
   //--------------------------------------------------------------------------------
   void play() {
-    // clear background
-    background(255);
-
-    //----------------------------------------
-    // show play window
-    fill(250, 230, 194);
-    stroke(190, 150, 100);
-    strokeWeight(5);
-
-    // draw a rectangle in the screen center, with size of half a screen
     rectMode(CORNER);
-    rect(50, 50, 900, 500);
-
-    // change text color to dark brown and setup style
-    fill(100, 60, 10);
-    text(firstLine, 270, 100, 900, 50);
+    info.showTextWindow();
+    info.showText(240, 50, 900, 50, firstLine);
 
     //----------------------------------------
     makeGuess();
@@ -96,9 +97,9 @@ class LogicGame {
     // draw boxes based on game difficulty (guess.length) and number of try (currentTry)
     // use shift variable to shift boxes
     for (int i = 0; i < guess.length; i++) {
-      displayUpBtn(firstLineX+5+(shift*i), firstLineY+(shift*currentTry));
+      displayUpBtn(firstLineX+15+(shift*i), firstLineY+(shift*currentTry));
       guessBox(firstLineX+(shift*i), firstLineY+15+(shift*currentTry), allVariants[guess[i]][i]);
-      displayDownBtn(firstLineX+5+(shift*i), firstLineY + guessBoxSize + 20 +(shift*currentTry));
+      displayDownBtn(firstLineX+15+(shift*i), firstLineY + guessBoxSize + 20 +(shift*currentTry));
     }
 
     // draw previous results
@@ -108,13 +109,8 @@ class LogicGame {
         guessBox(firstLineX+(shift*j), firstLineY+15+(shift*i), allVariants[guessHistory[i][j]][j]);
       }
       // number of correct results
-      strokeWeight(5);
-      textSize(20);
-      fill(190, 150, 100); 
       resultText = correctHistory[i] + " correct result(s)";
-      text(resultText, confirmButtonX, firstLineY+40+(shift*i));
-      strokeWeight(2);
-      textSize(15);
+      info.showText(confirmButtonX-60, firstLineY+20+(shift*i), 200, 50, resultText);
     }
 
     // confirm guess
@@ -158,12 +154,12 @@ class LogicGame {
     // should be text for game instructions menu
     if (val.equals("1") || val.equals("2") || val.equals("3") || val.equals("4")) {
       // box
-      fill(250, 230, 194); 
-      stroke(190, 150, 100);
+      fill(textBackground); 
+      stroke(textColor);
       rect(x, y, guessBoxSize, guessBoxSize, 2);
       // text inside a box
-      fill(190, 150, 100); 
-      text(val, x+guessBoxSize/4, y+(guessBoxSize/1.5));
+      fill(textColor); 
+      text(val, x+guessBoxSize/2.7, y+(guessBoxSize/1.7));
       // should show pictures for logic game
     } else {
       icon = loadImage("pics/" + val);
@@ -251,18 +247,6 @@ class LogicGame {
     } else { 
       return false;
     }
-  }
-
-
-  //--------------------------------------------------------------------------------
-  // EFFECT: reset game
-  //--------------------------------------------------------------------------------
-  void reset(World world) {
-    currentTry = 0;
-    generateRandomCorrectVariant();
-    guessToZero();
-    model = world;
-    setHistory();
   }
 
 

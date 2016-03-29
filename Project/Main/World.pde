@@ -37,7 +37,6 @@ class World{
   // methods
   //================================================================================
   
-  
   //--------------------------------------------------------------------------------
   // EFFECT: displays data according to current act
   //--------------------------------------------------------------------------------
@@ -64,24 +63,20 @@ class World{
         frg.display();
         aln.displayCloser();
         break;
-      case 6: 
+      case 6: // instructions for guess game
         info.displayGuessInstructions();
         break;
-      case 7:
+      case 7: // play logic game
         game.play();
         break;
       case 8: // regular ending
-        projectStub(); 
+        info.end(); 
         break;
       case 9: // great pilot ending
-        background(0);
-        fill(255);
-        text("You are great pilot", 20, 20);
+        info.secretPilot();
         break;
       case 10: // shame ending
-        background(0);
-        fill(255);
-        text("You did not help him. Shame on you.", 20, 20);
+        info.secretShame();
         break;
     }
   }
@@ -96,6 +91,8 @@ class World{
     } else if (currentAct == 5) {
       ufo.handleKeyPressed();
       landar.handleKeyPressed();
+    } else if (currentAct == 8) {
+      currentAct = 6;
     }
   } 
   
@@ -115,12 +112,6 @@ class World{
   //--------------------------------------------------------------------------------
   void handleMouseEvents() {
     switch(currentAct){
-      case 1:
-      case 2:
-      case 4:
-      case 6:
-        info.handleMouseEvents();
-        break;
       case 3:
         ufo.handleMousePressed();
         break;
@@ -131,7 +122,14 @@ class World{
         game.handleMouseEvents();
         break;
       case 8:
-        currentAct = 5; // TODO: this is temp stub
+      case 9:
+        currentAct = 1;
+        break;
+      case 10:
+        currentAct = 6;
+        break;
+      default:
+        info.handleMouseEvents();
         break;
     }
   }
@@ -142,34 +140,8 @@ class World{
   //--------------------------------------------------------------------------------
   void nextAct() {
     if(currentAct == 6) {
-      game.reset(this);
+      game.reset(this, info);
     }
     currentAct++;
-  }
-  
-  
-  //--------------------------------------------------------------------------------
-  // EFFECT: temporary stub
-  //--------------------------------------------------------------------------------
-  void projectStub(){
-    // clear background
-    background(255);
-    
-    // prepare text
-    String gameResult;
-    if(game.won){
-      gameResult = "Congratulations! You have won the game!";
-    } else {
-      gameResult = "It a pitty, but you have lost the game :(";
-    }
-    String finalText1 = "This is the end of homework. It covers Act#5 and Act#6 from initial proposal. ";
-    String finalText2 = "Final project will have more options. Please click anywhere on the screen to start over.";
-    
-    // show text
-    fill(0);
-    strokeWeight(5);
-    textSize(20);
-    text(gameResult, 100, 100, 800, 400);
-    text(finalText1 + finalText2, 100, 400, 800, 400);
   }
 }

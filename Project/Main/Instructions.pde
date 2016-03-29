@@ -33,6 +33,20 @@ class Instructions{
   String instruction4 = "Press the following button to confirm guess";
   String instruction5 = "Select game difficulty. \"1\" for easiest and \"4\" for hardest. \n\"3\" is suggested option.";
   
+  // act 9 instructions
+  String act9 = "Wow! You are a great pilot! Somehow you could collect enough energy to fly home. Who knows what could happen if you failed... \nTo restart the game - please press mouse button.";
+  int act9X = 25;
+  int act9Y = 25;
+  int act9Width = 500;
+  int act9Height = 150;
+  
+  // act 10 instructions
+  String act10 = "What did just happen? It is not you! \nI feel that you have to help him. \nPress mouse button and try again.";
+  int act10X = 25;
+  int act10Y = 25;
+  int act10Width = 370;
+  int act10Height = 120;
+  
   // text font = Kokonor-24
   PFont f;
   PImage picture;
@@ -122,13 +136,62 @@ class Instructions{
     
     // controls
     game.displayUpBtn(downX, upY);
-    game.guessBox(720, 445, str(guess.length));
+    game.guessBox(710, 445, str(guess.length));
     game.displayDownBtn(downX, downY);
     
     //----------------------------------------
     // finish instructions
     continueBtn(continueX, continueY);
     noBtn(noX, noY);
+  }
+  
+  
+  //--------------------------------------------------------------------------------
+  // EFFECT: act#8 - game ends here
+  //--------------------------------------------------------------------------------
+  void end(){
+    // clear background
+    showTextWindow();
+    
+    // prepare text
+    String gameResult;
+    if(game.won){
+      gameResult = "Congratulations! You have won the game! Alien seems to be happy because he has enough energy to fly home. He thanks you and flies away. Gosh, what a day!";
+    } else {
+      gameResult = "It a pity, but you made a wrong combination. Seems that an alien will have to try to combine rocks on his own.";
+    }
+    String finalText = "To start from the start screen - please press mouse button. To start logic game again - please press any keyboard button.";
+    
+    // show text
+    showText(100, 100, 800, 400, gameResult);
+    showText(100, 400, 800, 400, finalText);
+  }
+  
+  
+  //--------------------------------------------------------------------------------
+  // EFFECT: act#9 - secret ending #1 (great pilot)
+  //--------------------------------------------------------------------------------
+  void secretPilot() {
+    picture = loadImage("pics/pilot.jpg");
+    image(picture, 0, 0, width, height);
+    fill(black);
+    rect(act9X, act9Y, act9Width, act9Height);
+    fill(white);
+    text(act9, act9X, act9Y, act9Width, act9Height);
+  }
+  
+  
+  //--------------------------------------------------------------------------------
+  // EFFECT: act#10 - secret ending #2 (shame)
+  //--------------------------------------------------------------------------------
+  void secretShame() {
+    background(space);
+    picture = loadImage("pics/sad.jpg");
+    image(picture, 0, 0, width, height);
+    fill(black);
+    rect(act10X, act10Y, act10Width, act10Height);
+    fill(white);
+    text(act10, act10X, act10Y, act10Width, act10Height);
   }
   
   
