@@ -13,7 +13,7 @@ class Collect{
     world = model;
     ufo = inUfo;
     size(1000, 600);
-    background(255);
+    background(space);
     smooth();
     noStroke();
     for(int i = 0; i < drops.length; i++) {
@@ -37,7 +37,7 @@ class Collect{
   
   
   void transparentBackground() {
-    fill(50, 50, 100, 30);
+    fill(space, 30);
     rect(0, 0, width, height);
   }
   

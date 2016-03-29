@@ -20,7 +20,7 @@ class World{
     currentAct = act;
     
     // initialize objects
-    aln = new Alien();
+    aln = new Alien(this);
     bkg = new Background();
     frg = new Foreground();
     game = new LogicGame();
@@ -117,6 +117,7 @@ class World{
     switch(currentAct){
       case 1:
       case 2:
+      case 4:
       case 6:
         info.handleMouseEvents();
         break;

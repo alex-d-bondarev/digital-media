@@ -22,8 +22,11 @@ class Instructions{
   // act 2 instructions
   String act2 = "Hello, you were flying around, when you suddenly realized that you are low on energy. Fortunately you see some meteors passing buy. Try to collect meteors with little (white) and much (green) energy. Avoid other meteors as they drain energy from you. Yellow meteors drain little of energy, red - much. To control your spaceship - use arrow keys on blackboard or mouse clicks. (I recommend keyboard). You can see how much energy is left in left top corner. Click anywhere on screen to continue.";
   
-  // act 5 instructions
-  String introduction = "You see an alien. Why are you not shocked? He is definitely shocked. Did you see his smile? OK, somehow you understand him. He said that he collects energy from rocks and that he needs you help. Help him to find energy efficient combination of rocks";
+  // act 4 instructions
+  String act4 = "Seems that you did not succeed. Don't worry. I am sure you can find some rocks on that blue planet and get energy from them. Just remember about gravity, so you will need to find good landing spot. Press \"L\" button to see all landing spots and to choose the best for you. You can also press \"P\" button if you want to relax. If you land in wrong place - just press \"space\" button. Other controls are same as before. Click anywhere on screen to continue.";
+  
+  // act 6 instructions
+  String introduction = "Now you are a Kozak. You see an alien. Why are you not shocked? He is definitely shocked. Did you see his smile? OK, somehow you understand him. He told that he collects energy from rocks and that he needs you help. Help him to find energy efficient combination of rocks";
   String instruction1 = "You will play a logical minigame, where you need to guess the correct sequence.";
   String instruction2;
   String instruction3 = "Press the following buttons to select optioin";
@@ -62,6 +65,7 @@ class Instructions{
   // EFFECT: act#1 - displays start menu
   //--------------------------------------------------------------------------------
   void displayStart(){
+    background(space);
     picture = loadImage("pics/Title.png");
     image(picture, 250, 112, 500, 375);
     showText(350, 255, 290, 150, title);
@@ -81,9 +85,8 @@ class Instructions{
   // EFFECT: act#4 - displays start menu
   //--------------------------------------------------------------------------------
   void landing(){
-    picture = loadImage("pics/Title.png");
-    image(picture, 250, 112, 500, 375);
-    showText(350, 255, 290, 150, title);
+    showTextWindow();
+    showText(50, 150, 900, 500, act4);
   }
   
   

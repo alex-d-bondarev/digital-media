@@ -15,13 +15,17 @@ class Alien{
   long beforeWait;
   long timeToWait = 1000;
   
+  World world;
+  
   //================================================================================
   // constructor
   //================================================================================
-  Alien() {
+  Alien(World model) {
     alien = color(180,170,140);
     alienCloth = color(110,160,250);
     alienNeck = color(215,240,240);
+    
+    world = model;
   }
   
   //================================================================================
@@ -39,7 +43,10 @@ class Alien{
         
         // give alien some time to understand what is going on (wait timeToWait)
         if (beforeWait == 0) { beforeWait = millis(); }
-        if (millis() - beforeWait > timeToWait) { nextState(); }
+        if (millis() - beforeWait > timeToWait) { 
+          beforeWait = 0;
+          nextState(); 
+        }
         
     //----------------------------------------    
     // start mooving to field entrance
@@ -92,6 +99,12 @@ class Alien{
         moveAlienToCoordinate(400, 190);
       } else if (alienState == AlState.NEARKOZAK ) {
         tallAlien(alienX, alienY);
+        // wait 1 second before going to next screen
+        if (beforeWait == 0) { beforeWait = millis(); }
+        if (millis() - beforeWait > timeToWait) { 
+          beforeWait = 0;
+          world.nextAct(); 
+        }
       }
   }
   
