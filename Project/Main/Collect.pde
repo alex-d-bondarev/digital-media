@@ -47,7 +47,8 @@ class Collect{
     transparentBackground();
     endAct();
     displayEnergy();    
-    ufo.collect();
+    //ufo.collect();
+    ufo.display();
     intersect();
     fallMeteors();    
   }
