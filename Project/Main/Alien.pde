@@ -15,16 +15,18 @@ class Alien{
   long beforeWait;
   long timeToWait = 1000;
   
+  Sound sound;
   World world;
   
   //================================================================================
   // constructor
   //================================================================================
-  Alien(World model) {
+  Alien(World model, Sound music) {
     alien = color(180,170,140);
     alienCloth = color(110,160,250);
     alienNeck = color(215,240,240);
     
+    sound = music;
     world = model;
   }
   
@@ -171,6 +173,7 @@ class Alien{
   //         according to aliens' velocity
   //--------------------------------------------------------------------------------
   float moveToCoordinate(float cur, float trgt) {
+    sound.play("walking");
     if (cur > trgt + alienVelocity) { return cur - alienVelocity; } 
     else if (cur < trgt - alienVelocity) { return cur + alienVelocity; }
     else { return trgt; }

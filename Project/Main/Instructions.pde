@@ -26,7 +26,7 @@ class Instructions{
   String act4 = "Seems that you did not succeed. Don't worry. I am sure you can find some rocks on that blue planet and get energy from them. Just remember about gravity, so you will need to find good landing spot. Press \"L\" button to see all landing spots and to choose the best for you. You can also press \"P\" button if you want to relax. If you land in wrong place - just press \"space\" button. Other controls are same as before. Click anywhere on screen to continue.";
   
   // act 6 instructions
-  String introduction = "Now you are a Kozak. You see an alien. Why are you not shocked? He is definitely shocked. Did you see his smile? OK, somehow you understand him. He told that he collects energy from rocks and that he needs you help. Help him to find energy efficient combination of rocks";
+  String introduction = "Now you are a Kozak. You see an alien. Why are you not shocked? He is definitely shocked. Did you see his smile? OK, somehow you understand him. He told that he collects energy from rocks and that he needs your help. Find energy efficient combination of rocks!";
   String instruction1 = "You will play a logical minigame, where you need to guess the correct sequence.";
   String instruction2;
   String instruction3 = "Press the following buttons to select optioin";

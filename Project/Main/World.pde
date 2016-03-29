@@ -22,7 +22,7 @@ class World{
     
     // initialize objects
     sound = new Sound();
-    aln = new Alien(this);
+    aln = new Alien(this, sound);
     bkg = new Background();
     frg = new Foreground();
     game = new LogicGame();

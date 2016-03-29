@@ -46,7 +46,7 @@ class Collect{
   
   void endAct() {
     textSize(15);
-    if (energy == 0) {
+    if (energy <= 0) {
       world.nextAct(); 
       ufo.reset();
     } else if (millis() - gameStartTime > gameTime) { 
