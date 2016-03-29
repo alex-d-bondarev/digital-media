@@ -2,64 +2,62 @@ class Ufo{
   //================================================================================
   // properties
   //================================================================================
+  // booleans that reflect UFO's status
   boolean landed;
-  boolean niceLanding;
-  boolean paused;
   boolean moveLeft;
   boolean moveRight;
   boolean moveUp;
   boolean moveDown;
+  boolean niceLanding;
+  boolean paused;
   
+  // color
   color ufoMainColor;
   
+  // constants for moving
   float GRAVITY;
   float TORQUE;
   float WINDAGE;
   
+  // parameters that reflect UFO's status
   float distance;
   float horizontalSpeed;
   float posX;
   float posY;
-  float verticalSpeed;
   float ufoRange;
+  float verticalSpeed;
   
-  int energy;
-  
-  String message;
-  
+  // variables for related classes
   Alien aln;
   Landing landar;
   Sound sound;
   World world;
   
+  // other variables
+  int energy;  
+  String message;
+  
   //================================================================================
   // constructor
   //================================================================================
   Ufo(World model, Alien alien, Landing area, Sound music) {
+    // initiate classes
     world = model;
     aln = alien;
     landar = area;
     sound = music;
+    
+    // set constants
     ufoMainColor = color(50,106,70);
     GRAVITY = 0.015;
     TORQUE = 0.05;
     WINDAGE = 0.005;
     
-    // setup UFO
+    // setup UFO related classes
     aln.reset();
     landar.hide();
-    posX = 100;
-    posY = 20;
-    horizontalSpeed = 0;
-    verticalSpeed = 0;
-    moveRight = false;
-    moveLeft = false;
-    moveUp = false;
-    moveDown = false;
-    landed = false;
-    paused = false;
-    niceLanding = false;
-    ufoRange = 45;
+    
+    reset();
   }
   
   //================================================================================
@@ -67,7 +65,7 @@ class Ufo{
   //================================================================================
   
   //--------------------------------------------------------------------------------
-  // Effect: set UFO variables to starting point
+  // Effect: reset UFO variables to starting point
   //--------------------------------------------------------------------------------
   void reset() {
     aln.reset();

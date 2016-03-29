@@ -91,17 +91,18 @@ class Alien{
     
     
   //--------------------------------------------------------------------------------
-  // Effect: draws and moves tall alien
+  // Effect: draws and moves tall alien, when he comes close
   //--------------------------------------------------------------------------------
   void displayCloser() { 
-    //----------------------------------------    
     // move to Kozak
     if ( alienState == AlState.TOKOZAK ) {
         tallAlien(alienX, alienY);
         moveAlienToCoordinate(400, 190);
+        
+        // stay near kozak
       } else if (alienState == AlState.NEARKOZAK ) {
         tallAlien(alienX, alienY);
-        // wait 1 second before going to next screen
+        // wait 1 second before going to next act
         if (beforeWait == 0) { beforeWait = millis(); }
         if (millis() - beforeWait > timeToWait) { 
           beforeWait = 0;
@@ -157,7 +158,8 @@ class Alien{
   
   //--------------------------------------------------------------------------------
   // GIVEN: x and y coordinates
-  // EFFECT: moves alien to given coordinates changes status to next when coming
+  // EFFECT: moves alien to given coordinates 
+  //         changes alien status to next when arrived
   //--------------------------------------------------------------------------------
   void moveAlienToCoordinate(int trgtX, int trgtY) { 
     if (alienX != trgtX || alienY != trgtY) {          

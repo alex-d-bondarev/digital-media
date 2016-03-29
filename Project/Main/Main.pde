@@ -8,7 +8,6 @@ import ddf.minim.*;
 // Global Colors
 //--------------------------------------------------------------------------------
 color black = color(0);
-color white = color(255);
 color grass = color(70,  100, 40);
 color orange = color(245,170,0);
 color red = color(210,50,50);
@@ -17,6 +16,7 @@ color space = color(28, 39, 54);
 color textBackground = color(250, 230, 194);
 color textColor = color(100, 60, 10);
 color UFOStroke = color(55,240,240);
+color white = color(255);
 
 //--------------------------------------------------------------------------------
 // Global coordinates
@@ -44,7 +44,6 @@ int firstAct = 1;
 int[] guess = {0, 0, 0};
 Minim minim;
 World world;
-
 
 //=====================================================//
 //================ Main functionality =================//

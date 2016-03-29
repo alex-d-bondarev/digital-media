@@ -2,11 +2,11 @@ class Background {
   //================================================================================
   // properties
   //================================================================================
+  color leaves;
+  color lightLeaves;
   color lightWheat;
   color water;
   color wheat;
-  color leaves;
-  color lightLeaves;
   
   //================================================================================
   // constructor
@@ -15,6 +15,7 @@ class Background {
     lightWheat = color(214, 190, 65);
     water = color(160, 175, 240);
     wheat = color(180, 180, 65);
+    
     // tree colors
     leaves = color(60,  120, 20);
     lightLeaves = color(105, 160, 70); 
@@ -31,6 +32,7 @@ class Background {
     drawSky();
     drawNature();
   }
+  
   
   //--------------------------------------------------------------------------------
   // Effect: draws sky 
