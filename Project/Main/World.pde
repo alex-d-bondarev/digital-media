@@ -131,6 +131,11 @@ class World{
         collectGame.reset();
         ufo.reset();
         break;      
+      case 2:
+        collectGame.reset();
+        nextAct();
+        sound.play("click");
+        break;
       case 3:
         ufo.handleMousePressed();
         break;
