@@ -95,7 +95,11 @@ class World{
   // EFFECT: Handle arrow keys (pressed)
   //--------------------------------------------------------------------------------
   void handleKeyPressed(){
-    if (currentAct == 3) {
+    if (currentAct == 1) {
+      info.handleMouseEvents();
+      collectGame.reset();
+      ufo.reset();
+    } else if (currentAct == 3) {
       ufo.handleKeyPressed();
     } else if (currentAct == 5) {
       ufo.handleKeyPressed();

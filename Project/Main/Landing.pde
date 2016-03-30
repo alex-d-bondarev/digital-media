@@ -68,7 +68,7 @@ class Landing{
   
   
   //--------------------------------------------------------------------------------
-  // EFFECT: Handle arrow keys (pressed)
+  // EFFECT: Handle “L” key (pressed)
   //--------------------------------------------------------------------------------
   void handleKeyPressed(){
     if(key == 'l' || key == 'L'){

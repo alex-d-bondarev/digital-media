@@ -315,7 +315,7 @@ class Instructions{
   
   //--------------------------------------------------------------------------------
   // GIVEN: x and y coordinates of a button
-  // RETURN: true button is in given coordinates and mouse is over, else - false 
+  // RETURN: true, if button is in given coordinates and mouse is over, else - false 
   //--------------------------------------------------------------------------------
   boolean inButton(float x, float y){
     if(mouseX >= x && mouseX <= x + btnWidth 
