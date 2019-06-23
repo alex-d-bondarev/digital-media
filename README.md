@@ -4,6 +4,8 @@ My Digital Media studies
 You can copy and reuse code [![MIT License](http://img.shields.io/badge/license-MIT-green.svg)](https://github.com/selenide/selenide/blob/master/LICENSE)
 (be careful with plagiarism)
 
+Exam solutions are not included here
+
 Final Project
 -------------
 
